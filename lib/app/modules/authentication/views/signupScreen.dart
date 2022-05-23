@@ -67,7 +67,7 @@ class SignupScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                         customBorderRadius,
                       ),
-                      color: secondaryColor,
+                      color: orangeColor,
                     ),
                     alignment: Alignment.center,
                     child: controller.showSignupButtonLoadingAnimation.value

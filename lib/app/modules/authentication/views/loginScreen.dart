@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                       TextSpan(
                         text: "Get Started!",
                         style: defaultTS.copyWith(
-                          color: primaryColor,
+                          color: orangeColor,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
