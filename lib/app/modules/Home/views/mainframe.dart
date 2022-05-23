@@ -17,18 +17,13 @@ class Mainframe extends StatelessWidget {
         height: Get.height,
         width: Get.width,
         child: PageView(
-          physics: const BouncingScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
           onPageChanged: (value) {
             controller.currentPageIndexOnMainframe.value = value;
           },
           controller: controller.mainframePageController,
           children: [
             Dashboard(),
-            Container(
-              height: Get.height,
-              width: Get.width,
-              color: Colors.blueAccent,
-            ),
             Container(
               height: Get.height,
               width: Get.width,
@@ -46,12 +41,16 @@ class Mainframe extends StatelessWidget {
           elevation: 6,
           currentIndex: controller.currentPageIndexOnMainframe.value,
           onTap: (value) {
-            controller.currentPageIndexOnMainframe.value = value;
-            controller.mainframePageController.animateToPage(
-              value,
-              duration: customDuration,
-              curve: Curves.linearToEaseOut,
-            );
+            if (value == 2) {
+              controller.addATaskDialogPopUp();
+            } else {
+              controller.currentPageIndexOnMainframe.value = value;
+              controller.mainframePageController.animateToPage(
+                controller.currentPageIndexOnMainframe.value,
+                duration: customDuration,
+                curve: Curves.linearToEaseOut,
+              );
+            }
           },
           items: [
             BottomNavigationBarItem(
@@ -65,22 +64,22 @@ class Mainframe extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.check_circle_outline,
+                Icons.calendar_today,
                 color: controller.currentPageIndexOnMainframe.value == 1
+                    ? primaryColor
+                    : greyColor,
+              ),
+              label: "Completed",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add,
+                color: controller.currentPageIndexOnMainframe.value == 2
                     ? primaryColor
                     : greyColor,
               ),
               label: "Add a Task",
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.calendar_today,
-                color: controller.currentPageIndexOnMainframe.value == 2
-                    ? primaryColor
-                    : greyColor,
-              ),
-              label: "Completed",
-            )
           ],
         );
       }),
