@@ -39,6 +39,8 @@ dependencies:
   firebase_core: any
   lottie: any
   font_awesome_flutter: any
+  intl: any
+  timeago: any
 
 dev_dependencies:
   flutter_test:

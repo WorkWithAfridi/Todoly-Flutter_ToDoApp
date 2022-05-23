@@ -15,7 +15,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Get.width);
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(

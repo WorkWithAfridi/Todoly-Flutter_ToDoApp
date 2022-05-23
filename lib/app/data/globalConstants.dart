@@ -9,6 +9,7 @@ const Color yellowColor = Color(0xffF5A921);
 const Color orangeColor = Color(0xffF4863C);
 const Color greyColor = Color(0xff999999);
 const Color whiteColor = Color(0xffFAFAFA);
+const Color mainframeScaffoldColor = Color(0xffF7F7F7);
 //Custom Text Styles
 TextStyle boldTS25 = const TextStyle(
   fontFamily: "Poppins-Bold",
