@@ -37,7 +37,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               height: 10,
             ),
             Text(
-              "Get things done",
+              "Get things done.",
               style: boldTS25.copyWith(
                 color: secondaryColor,
               ),
@@ -66,7 +66,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Obx(
       () {
         return SizedBox(
-          height: 80,
+          height: 100,
           child: Text(
             controller.currentPageIndex.value == 0
                 ? "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis."
@@ -75,10 +75,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     : controller.currentPageIndex.value == 2
                         ? "Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat."
                         : "Hello",
-            style: const TextStyle(
-              fontSize: 15,
-              color: greyColor,
-            ),
+            style: defaultTS.copyWith(color: greyColor),
           ),
         );
       },

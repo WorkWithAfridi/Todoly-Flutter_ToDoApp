@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:todoly/app/modules/authentication/binding/AuthenticationModuleBinding.dart';
 import 'package:todoly/app/modules/authentication/views/loginScreen.dart';
+import 'package:todoly/app/modules/authentication/views/signupScreen.dart';
 import 'package:todoly/app/modules/introduction/binding/introductionModuleBinding.dart';
 import 'package:todoly/app/modules/introduction/views/onBoardingScreen.dart';
 import 'package:todoly/app/modules/introduction/views/splashScreen.dart';
@@ -26,6 +27,5 @@ class ROUTES {
       page: () => LoginScreen(),
       binding: AuthenticationModuleBinding(),
     ),
-
   ];
 }

@@ -35,7 +35,9 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Text(
               "Todoly",
-              style: boldTS25,
+              style: boldTS25.copyWith(
+                color: whiteColor,
+              ),
             ),
           ],
         ),

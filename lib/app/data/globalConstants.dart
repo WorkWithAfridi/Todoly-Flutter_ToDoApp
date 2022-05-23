@@ -12,11 +12,16 @@ const Color whiteColor = Color(0xffFAFAFA);
 //Custom Text Styles
 TextStyle boldTS25 = const TextStyle(
   fontFamily: "Poppins-Bold",
-  color: Colors.white,
+  color: darkBlueColor,
   fontSize: 25,
 );
 
-//Custom variables
-double customBorder = 8;
+TextStyle defaultTS = const TextStyle(
+  fontSize: 15,
+  color: Colors.black,
+  fontFamily: "Poppins-Regular",
+);
 
+//Custom variables
+double customBorderRadius = 8;
 Duration customDuration = const Duration(milliseconds: 400);
