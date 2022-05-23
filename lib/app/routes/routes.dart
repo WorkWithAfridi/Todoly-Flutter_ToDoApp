@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:todoly/app/modules/Home/Binding/homeModuleBinding.dart';
+import 'package:todoly/app/modules/Home/views/mainframe.dart';
 import 'package:todoly/app/modules/authentication/binding/AuthenticationModuleBinding.dart';
 import 'package:todoly/app/modules/authentication/views/loginScreen.dart';
 import 'package:todoly/app/modules/authentication/views/signupScreen.dart';
@@ -10,7 +12,7 @@ class ROUTES {
   static get getSplashScreenRoute => "/introduction/splashscreen";
   static get getOnBoardingScreenRoute => "/introduction/onboardingscreen";
   static get getLoginScreenRoute => '/authentication/loginscreeb';
-
+  static get getHomeScreenRoute => '/home/mainframe';
   static List<GetPage> routes = [
     GetPage(
       name: getSplashScreenRoute,
@@ -26,6 +28,11 @@ class ROUTES {
       name: getLoginScreenRoute,
       page: () => LoginScreen(),
       binding: AuthenticationModuleBinding(),
+    ),
+    GetPage(
+      name: getHomeScreenRoute,
+      page: () => Mainframe(),
+      binding: HomeModuleBinding(),
     ),
   ];
 }

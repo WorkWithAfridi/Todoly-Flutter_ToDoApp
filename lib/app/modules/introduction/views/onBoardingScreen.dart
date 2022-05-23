@@ -52,11 +52,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
-        backgroundColor: whiteColor,
+        backgroundColor: secondaryColor,
         onPressed: controller.onNextButtonClick,
         child: const Icon(
           FontAwesomeIcons.arrowRight,
-          color: primaryColor,
+          color: whiteColor,
         ),
       ),
     );

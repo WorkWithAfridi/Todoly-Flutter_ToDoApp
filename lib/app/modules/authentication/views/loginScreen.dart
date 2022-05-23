@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:todoly/app/data/globalConstants.dart';
 import 'package:todoly/app/globalWidgets/appIcon.dart';
+import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/globalWidgets/textField.dart';
 import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 import 'package:todoly/app/modules/authentication/widgets/socialMediaButton.dart';
@@ -57,24 +58,32 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        height: 55,
-                        width: Get.width / 2,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            customBorderRadius,
+                      Obx(() {
+                        return GestureDetector(
+                          onTap: controller.onLoginButtonClick,
+                          child: Container(
+                            height: 55,
+                            width: Get.width / 2,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                customBorderRadius,
+                              ),
+                              color: secondaryColor,
+                            ),
+                            alignment: Alignment.center,
+                            child: controller
+                                    .showLoginButtonLoadingAnimation.value
+                                ? const CustomCircularProgressLoadingIndicator()
+                                : Text(
+                                    'Login',
+                                    style: defaultTS.copyWith(
+                                        color: whiteColor,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w800),
+                                  ),
                           ),
-                          color: secondaryColor,
-                        ),
-                        alignment: Alignment.center,
-                        child: Text(
-                          'Login',
-                          style: defaultTS.copyWith(
-                              color: whiteColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w800),
-                        ),
-                      ),
+                        );
+                      }),
                       const SizedBox(
                         height: 20,
                       ),
@@ -90,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                 height: 10,
               ),
               GestureDetector(
-                onTap: controller.onSignupButtonClick,
+                onTap: controller.onSignupOnLoginPageButtonClick,
                 child: RichText(
                   text: TextSpan(
                     children: [

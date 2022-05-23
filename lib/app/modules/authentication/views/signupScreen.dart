@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:todoly/app/data/globalConstants.dart';
 import 'package:todoly/app/globalWidgets/appIcon.dart';
 import 'package:todoly/app/globalWidgets/customBackButton.dart';
+import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/globalWidgets/textField.dart';
 import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 import 'package:todoly/app/modules/authentication/widgets/socialMediaButton.dart';
@@ -56,24 +57,31 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Container(
-                height: 55,
-                width: Get.width / 2,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    customBorderRadius,
+              Obx(() {
+                return GestureDetector(
+                  onTap: controller.onSignupButtonClick,
+                  child: Container(
+                    height: 55,
+                    width: Get.width / 2,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        customBorderRadius,
+                      ),
+                      color: secondaryColor,
+                    ),
+                    alignment: Alignment.center,
+                    child: controller.showSignupButtonLoadingAnimation.value
+                        ? CustomCircularProgressLoadingIndicator()
+                        : Text(
+                            'Signup',
+                            style: defaultTS.copyWith(
+                                color: whiteColor,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w800),
+                          ),
                   ),
-                  color: secondaryColor,
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  'Signup',
-                  style: defaultTS.copyWith(
-                      color: whiteColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800),
-                ),
-              ),
+                );
+              }),
               const SizedBox(
                 height: 20,
               ),
