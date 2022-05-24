@@ -13,4 +13,5 @@ All major Module routes are stored in the Routes file.
 Individual pages and screen are stored in the view folders relating to their Modules.
 
 Demo user email: kyoto@gmail.com & password: 123456. Or you can create your own account and fill it up with data. :)
-Demo video: 
+
+Demo video: https://www.youtube.com/watch?v=npZTpu-3CVw
