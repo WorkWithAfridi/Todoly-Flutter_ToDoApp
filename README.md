@@ -8,5 +8,9 @@ UI Design: https://www.behance.net/gallery/124541301/To-Do-List-App-UI-Design?tr
 
 Project architecture: GetX Architecture and Some BLoC logic.
 
+Each Module has their own controller and binding file.
 All major Module routes are stored in the Routes file.
 Individual pages and screen are stored in the view folders relating to their Modules.
+
+Demo user email: kyoto@gmail.com & password: 123456. Or you can create your own account and fill it up with data. :)
+Demo video: 
