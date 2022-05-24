@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:todoly/app/data/globalConstants.dart';
 import 'package:todoly/app/routes/routes.dart';
 
-void main() {
+main() async {
+  await GetStorage.init();
   runApp(TodolyApp());
 }
 

@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: any
+  get_storage: any
   firebase_auth: any
   firebase_core: any
   lottie: any
