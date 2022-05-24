@@ -30,7 +30,7 @@ class DashboardPage extends StatelessWidget {
               getPendingToDoList(),
               getCompletedToDoList(),
               const SizedBox(
-                height: 35,
+                height: 30,
               ),
             ],
           ),

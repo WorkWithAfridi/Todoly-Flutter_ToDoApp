@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 import 'package:todoly/app/modules/introduction/controllers/introductionModuleController.dart';
 
 class IntroductionModuleBinding extends Bindings {
@@ -7,5 +8,6 @@ class IntroductionModuleBinding extends Bindings {
     Get.lazyPut(
       () => IntroductionModuleController(),
     );
+    Get.put(AuthenticationModuleController());
   }
 }

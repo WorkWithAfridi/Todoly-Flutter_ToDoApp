@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "751936603486",
+    "project_id": "todoly-db60d",
+    "storage_bucket": "todoly-db60d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751936603486:android:6a7f72a18276ed661a3bcf",
+        "android_client_info": {
+          "package_name": "com.workwithafridi.todoly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "751936603486-ql5t6ehv4gvsljrk1pr5htplqhlt47qg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEF07kWJwsiPI2OLRjKbeXLfDUQ-UJ95I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "751936603486-ql5t6ehv4gvsljrk1pr5htplqhlt47qg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

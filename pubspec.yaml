@@ -38,6 +38,7 @@ dependencies:
   get_storage: any
   firebase_auth: any
   firebase_core: any
+  cloud_firestore: any
   lottie: any
   font_awesome_flutter: any
   intl: any

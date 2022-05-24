@@ -154,6 +154,7 @@ class SignupScreen extends StatelessWidget {
           hint: "Enter your password...",
           textInputType: TextInputType.text,
           maxLines: 1,
+          isPassword: true,
         ),
         const SizedBox(
           height: 10,
