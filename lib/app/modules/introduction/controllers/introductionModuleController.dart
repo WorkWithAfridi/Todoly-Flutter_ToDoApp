@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 import 'package:todoly/app/routes/routes.dart';
+
+import '../../../../firebaseFunctions/authenticationFunctions.dart';
 
 class IntroductionModuleController {
   //Variables
@@ -12,7 +16,20 @@ class IntroductionModuleController {
     await Future.delayed(const Duration(seconds: 2));
     isFirstBoot
         ? Get.offNamed(ROUTES.getOnBoardingScreenRoute)
-        : Get.offNamed(ROUTES.getLoginScreenRoute);
+        : checkIfUserIsLoggedInOrNot();
+  }
+
+  //Checks if user is logged in or not
+  void checkIfUserIsLoggedInOrNot() async {
+    if (await FirebaseAuth.instance.currentUser! != null) {
+      final AuthenticationModuleController authenticationModuleController =
+          Get.find();
+      authenticationModuleController.userModel =
+          await AuthenticationFunctions().getUserData();
+      Get.offNamed(ROUTES.getHomeScreenRoute);
+    } else {
+      Get.offNamed(ROUTES.getLoginScreenRoute);
+    }
   }
 
   // Checks if its a new user + first boot.
