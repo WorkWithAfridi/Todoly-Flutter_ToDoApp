@@ -22,6 +22,13 @@ class _MainframeState extends State<Mainframe> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainframeScaffoldColor,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0),
+        child: AppBar(
+          backgroundColor: primaryColor,
+          elevation: 0,
+        ),
+      ),
       body: SizedBox(
         height: Get.height,
         width: Get.width,

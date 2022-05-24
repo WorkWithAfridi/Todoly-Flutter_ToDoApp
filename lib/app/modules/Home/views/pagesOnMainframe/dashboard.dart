@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todoly/app/data/globalConstants.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:todoly/app/modules/Home/views/profile.dart';
 import 'package:todoly/app/modules/Home/widgets/todoCard.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -260,13 +261,18 @@ class DashboardPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://images.unsplash.com/photo-1633332755192-727a05c4013d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880'),
-                  radius: 30,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(() => ProfileScreen());
+                  },
+                  child: const CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        'https://images.unsplash.com/photo-1633332755192-727a05c4013d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880'),
+                    radius: 30,
+                  ),
                 ),
-                Icon(
+                const Icon(
                   Icons.settings,
                   color: whiteColor,
                 ),
@@ -287,9 +293,9 @@ class DashboardPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "Dashboard",
+                  "My Dashboard",
                   style: defaultTS.copyWith(
-                      color: whiteColor, fontSize: 25, height: .95),
+                      color: whiteColor, fontSize: 25, height: 1),
                 ),
               ],
             ),
