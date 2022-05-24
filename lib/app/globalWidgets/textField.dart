@@ -35,7 +35,7 @@ class CustomTextField extends StatelessWidget {
           borderSide: Divider.createBorderSide(
             context,
             color: greyColor,
-            width: 1,
+            width: .5,
           ),
           borderRadius: BorderRadius.circular(
             customBorderRadius,
@@ -55,13 +55,13 @@ class CustomTextField extends StatelessWidget {
           borderSide: Divider.createBorderSide(
             context,
             color: greyColor,
-            width: 1,
+            width: .5,
           ),
           borderRadius: BorderRadius.circular(
             customBorderRadius,
           ),
         ),
-        fillColor: whiteColor,
+        fillColor: greyColor.withOpacity(.1),
         filled: true,
         contentPadding: const EdgeInsets.all(
           10,

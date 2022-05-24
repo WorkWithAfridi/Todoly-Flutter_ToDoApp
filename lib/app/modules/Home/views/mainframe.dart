@@ -105,135 +105,141 @@ class _MainframeState extends State<Mainframe> {
           style: boldTS25.copyWith(fontSize: 18),
         ),
         scrollable: true,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        content: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Title',
-              style: defaultTS.copyWith(
-                color: darkBlueColor,
-                fontWeight: FontWeight.w800,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        content: SizedBox(
+          width: Get.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Title',
+                style: defaultTS.copyWith(
+                  color: darkBlueColor,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            CustomTextField(
-              TEC: controller.addATaskTitleTEC,
-              hint: "Enter a title",
-              textInputType: TextInputType.text,
-              maxLines: 1,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Description',
-              style: defaultTS.copyWith(
-                color: darkBlueColor,
-                fontWeight: FontWeight.w800,
+              const SizedBox(
+                height: 5,
               ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            CustomTextField(
-              TEC: controller.addATaskDescriptionTEC,
-              hint: "Enter a description",
-              textInputType: TextInputType.text,
-              maxLines: 5,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Event date',
-              style: defaultTS.copyWith(
-                color: darkBlueColor,
-                fontWeight: FontWeight.w800,
+              CustomTextField(
+                TEC: controller.addATaskTitleTEC,
+                hint: "Enter a title",
+                textInputType: TextInputType.text,
+                maxLines: 1,
               ),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            Obx(() {
-              return controller.showSelectedDate.value
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          DateFormat.MMMEd()
-                              .format(controller.selectedEventDate.value),
-                          style: boldTS25.copyWith(fontSize: 20),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            controller.showSelectedDate.value = false;
-                          },
-                          child: const Icon(
-                            Icons.close,
-                            color: Colors.red,
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Description',
+                style: defaultTS.copyWith(
+                  color: darkBlueColor,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              CustomTextField(
+                TEC: controller.addATaskDescriptionTEC,
+                hint: "Enter a description",
+                textInputType: TextInputType.text,
+                maxLines: 5,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Event date',
+                style: defaultTS.copyWith(
+                  color: darkBlueColor,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Obx(() {
+                return controller.showSelectedDate.value
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            DateFormat.MMMEd()
+                                .format(controller.selectedEventDate.value),
+                            style: boldTS25.copyWith(fontSize: 20),
                           ),
-                        ),
-                      ],
-                    )
-                  : Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            controller.selectedEventDate.value = DateTime.now();
-                            controller.showSelectedDate.value = true;
-                          },
-                          child: Container(
-                            width: 100,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: primaryColor,
+                          GestureDetector(
+                            onTap: () {
+                              controller.showSelectedDate.value = false;
+                            },
+                            child: const Icon(
+                              Icons.close,
+                              color: Colors.red,
                             ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Today",
-                              style: defaultTS.copyWith(
-                                fontWeight: FontWeight.w800,
-                                color: whiteColor,
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              controller.selectedEventDate.value =
+                                  DateTime.now();
+                              controller.showSelectedDate.value = true;
+                            },
+                            child: Container(
+                              width: 100,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: primaryColor,
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Today",
+                                style: defaultTS.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  color: whiteColor,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            controller.selectDate(context);
-                          },
-                          child: Container(
-                            width: 100,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: primaryColor,
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Schedule",
-                              style: defaultTS.copyWith(
-                                fontWeight: FontWeight.w800,
-                                color: whiteColor,
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              controller.selectDate(context);
+                            },
+                            child: Container(
+                              width: 100,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: primaryColor,
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Schedule",
+                                style: defaultTS.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  color: whiteColor,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    );
-            }),
-            const SizedBox(
-              height: 5,
-            ),
-          ],
+                        ],
+                      );
+              }),
+              const SizedBox(
+                height: 5,
+              ),
+            ],
+          ),
         ),
         actionsAlignment: MainAxisAlignment.center,
         actions: [

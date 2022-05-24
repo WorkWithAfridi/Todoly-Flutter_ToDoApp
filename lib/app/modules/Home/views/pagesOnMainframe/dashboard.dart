@@ -338,7 +338,16 @@ class DashboardPage extends StatelessWidget {
   Container getCustomAppBar() {
     return Container(
       height: 150,
-      color: primaryColor,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            secondaryColor,
+            primaryColor,
+          ],
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
@@ -390,9 +399,16 @@ class DashboardPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Icon(
-                  Icons.settings,
-                  color: whiteColor,
+                GestureDetector(
+                  onTap: () {},
+                  child: const SizedBox(
+                    height: 50,
+                    width: 25,
+                    child: Icon(
+                      Icons.search,
+                      color: whiteColor,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -411,7 +427,7 @@ class DashboardPage extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "My Dashboard",
+                  "Todoly Dashboard",
                   style: defaultTS.copyWith(
                       color: whiteColor, fontSize: 25, height: 1),
                 ),

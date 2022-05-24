@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todoly/app/globalWidgets/snackbar.dart';
 import 'package:todoly/app/modules/authentication/views/signupScreen.dart';
 import 'package:todoly/app/routes/routes.dart';
 import 'package:todoly/model/userModel.dart';
@@ -31,27 +32,31 @@ class AuthenticationModuleController {
   }
 
   void onLoginButtonClick() async {
-    showLoginButtonLoadingAnimation.value = true;
-    await Future.delayed(const Duration(seconds: 2));
     String email = loginEmailTEC.value.text;
     String password = loginPasswordTEC.value.text;
     if (email.isNotEmpty && password.isNotEmpty) {
+      showLoginButtonLoadingAnimation.value = true;
+      await Future.delayed(const Duration(seconds: 2));
       String isLoginSuccessful = await AuthenticationFunctions()
           .loginUser(email: email, password: password);
       if (isLoginSuccessful == "Success") {
+        showLoginButtonLoadingAnimation.value = false;
+        loginEmailTEC.text = '';
+        loginPasswordTEC.text = '';
         Get.offAllNamed(ROUTES.getHomeScreenRoute);
       } else {
-        Get.snackbar(
-          "Error",
-          "Sorry an error occurred while trying to sign you in! Please try again later. :(",
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        showLoginButtonLoadingAnimation.value = false;
+        showCustomSnackBar(
+          title: "Error",
+          message:
+              "Sorry an error occurred while trying to sign you in! Please try again later. :(",
         );
       }
     } else {
-      Get.snackbar(
-        "Error logging in!!",
-        "User credentials cannot be left empty. :(",
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      showLoginButtonLoadingAnimation.value = false;
+      showCustomSnackBar(
+        title: "Error logging in!!",
+        message: "User credentials cannot be left empty. :(",
       );
     }
   }
@@ -71,19 +76,21 @@ class AuthenticationModuleController {
       String isSignupSuccessful = await AuthenticationFunctions().signUpUser(
           userName: userName, email: email, password: password, phone: phone);
       if (isSignupSuccessful == 'Success') {
+        showSignupButtonLoadingAnimation.value = false;
         Get.offAllNamed(ROUTES.getHomeScreenRoute);
       } else {
-        Get.snackbar(
-          "Error",
-          "Sorry an error occurred while trying to sign you up! Please try again later. :(",
-          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        showSignupButtonLoadingAnimation.value = false;
+        showCustomSnackBar(
+          title: "Error",
+          message:
+              "Sorry an error occurred while trying to sign you up! Please try again later. :(",
         );
       }
     } else {
-      Get.snackbar(
-        "Error signing up!!",
-        "User credentials cannot be left empty. :(",
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      showSignupButtonLoadingAnimation.value = false;
+      showCustomSnackBar(
+        title: "Error signing up!!",
+        message: "User credentials cannot be left empty. :(",
       );
     }
   }

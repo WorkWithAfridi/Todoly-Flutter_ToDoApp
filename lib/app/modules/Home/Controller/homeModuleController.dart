@@ -4,6 +4,8 @@ import 'package:todoly/app/data/globalConstants.dart';
 import 'package:todoly/app/globalWidgets/textField.dart';
 import 'package:todoly/firebaseFunctions/postingFunctions.dart';
 
+import '../../../globalWidgets/snackbar.dart';
+
 class HomeModuleController {
   //Variables
   var currentPageIndexOnMainframe = 0.obs;
@@ -49,24 +51,22 @@ class HomeModuleController {
         addATaskDescriptionTEC.text = "";
         showSelectedDate.value = false;
         Get.back();
-        Get.snackbar(
-          "Success! :D",
-          "Your task has been added to your Todoly list.",
-          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        showCustomSnackBar(
+          title: "Success! :D",
+          message: "Your task has been added to your Todoly list.",
         );
       } else {
-        Get.snackbar(
-          "Error",
-          "An error occurred while trying to save our task to your Todoly list.",
-          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-        );
         showLoadingAnimationInAddATaskPopup.value = false;
+        showCustomSnackBar(
+          title: "Error",
+          message:
+              "An error occurred while trying to save our task to your Todoly list.",
+        );
       }
     } else {
-      Get.snackbar(
-        "Error",
-        "Input fields cannot be empty! :(",
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      showCustomSnackBar(
+        title: "Error",
+        message: "Input fields cannot be empty! :(",
       );
     }
   }
@@ -75,10 +75,9 @@ class HomeModuleController {
   void deleteTodoTask(String id) {
     FirebaseFunctions().deleteTodoTask(id);
     Get.back();
-    Get.snackbar(
-      "Task deleted",
-      "Your task has been deleted from Todoly.",
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+    showCustomSnackBar(
+      title: "Task deleted",
+      message: "Your task has been deleted from Todoly.",
     );
   }
 }
