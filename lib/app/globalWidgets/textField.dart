@@ -29,7 +29,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         hintStyle: defaultTS.copyWith(
-          color: greyColor,
+          color: greyColor.withOpacity(.7),
         ),
         border: OutlineInputBorder(
           borderSide: Divider.createBorderSide(

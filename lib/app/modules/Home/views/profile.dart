@@ -20,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
           style: boldTS25.copyWith(fontSize: 16, color: whiteColor),
         ),
         leading: CustomBackButton(),
-        backgroundColor: primaryColor,
+        backgroundColor: secondaryColor,
         centerTitle: true,
         elevation: 0,
       ),
@@ -34,7 +34,16 @@ class ProfileScreen extends StatelessWidget {
             Container(
               height: 180,
               width: Get.width,
-              color: primaryColor,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    secondaryColor,
+                    primaryColor,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

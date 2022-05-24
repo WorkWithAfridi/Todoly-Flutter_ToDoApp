@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:todoly/app/data/globalConstants.dart';
 import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/modules/Home/views/profile.dart';
+import 'package:todoly/app/modules/Home/views/searchScreen.dart';
 import 'package:todoly/app/modules/Home/widgets/todoCard.dart';
 import 'package:todoly/model/taskModel.dart';
 
@@ -400,10 +401,16 @@ class DashboardPage extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
-                  child: const SizedBox(
+                  onTap: () {
+                    Get.to(() => SearchScreen());
+                  },
+                  child: Container(
                     height: 50,
-                    width: 25,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      color: whiteColor.withOpacity(.1),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
                     child: Icon(
                       Icons.search,
                       color: whiteColor,

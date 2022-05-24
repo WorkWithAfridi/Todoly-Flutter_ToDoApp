@@ -12,9 +12,12 @@ class HomeModuleController {
   PageController mainframePageController = PageController(initialPage: 0);
   TextEditingController addATaskTitleTEC = TextEditingController();
   TextEditingController addATaskDescriptionTEC = TextEditingController();
+  TextEditingController searchTEC = TextEditingController();
   var selectedEventDate = DateTime.now().obs;
   var showSelectedDate = false.obs;
   var showLoadingAnimationInAddATaskPopup = false.obs;
+  var showSearchResults = false.obs;
+  var searchQuery = ''.obs;
 
   //Functions
   selectDate(BuildContext context) async {
@@ -80,4 +83,6 @@ class HomeModuleController {
       message: "Your task has been deleted from Todoly.",
     );
   }
+
+  //Search for a todo task
 }
