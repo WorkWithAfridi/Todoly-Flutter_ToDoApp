@@ -92,8 +92,10 @@ class SearchScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       TaskModel taskModel =
                           TaskModel.fromSnap(snapshot.data!.docs[index]);
-                      return taskModel.title.toLowerCase()
-                              .contains(homeModuleController.searchQuery.value.toLowerCase())
+                      return taskModel.title.toLowerCase().contains(
+                                homeModuleController.searchTEC.value.text
+                                    .toLowerCase(),
+                              )
                           ? ToDoCard(
                               task: taskModel,
                             )
@@ -129,7 +131,7 @@ class SearchScreen extends StatelessWidget {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
-                    hintText: "Search",
+                    hintText: "Enter a query...",
                     hintStyle: defaultTS.copyWith(
                       color: whiteColor.withOpacity(.7),
                     ),
@@ -174,8 +176,21 @@ class SearchScreen extends StatelessWidget {
                   },
                   onSubmitted: (value) {
                     homeModuleController.showSearchResults.value = true;
-                    homeModuleController.searchQuery.value = value;
                   },
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: homeModuleController.clearScreenInSearchPage,
+                child: const SizedBox(
+                  height: 50,
+                  width: 30,
+                  child: Icon(
+                    Icons.close,
+                    color: whiteColor,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -185,9 +200,6 @@ class SearchScreen extends StatelessWidget {
                 onTap: () {
                   if (homeModuleController.searchTEC.value.text.isNotEmpty) {
                     homeModuleController.showSearchResults.value = true;
-                    print(homeModuleController.searchTEC.text);
-                    homeModuleController.searchQuery.value =
-                        homeModuleController.searchTEC.text;
                   }
                 },
                 child: Container(

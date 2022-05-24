@@ -17,7 +17,6 @@ class HomeModuleController {
   var showSelectedDate = false.obs;
   var showLoadingAnimationInAddATaskPopup = false.obs;
   var showSearchResults = false.obs;
-  var searchQuery = ''.obs;
 
   //Functions
   selectDate(BuildContext context) async {
@@ -84,5 +83,9 @@ class HomeModuleController {
     );
   }
 
-  //Search for a todo task
+  //SearchScreen
+  void clearScreenInSearchPage() {
+    showSearchResults.value = false;
+    searchTEC.text = '';
+  }
 }
