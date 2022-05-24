@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 
+import '../app/globalWidgets/snackbar.dart';
 import '../model/userModel.dart';
 
 class AuthenticationFunctions {
@@ -43,6 +44,10 @@ class AuthenticationFunctions {
     } on FirebaseAuthException catch (e) {
       //TODO: add error handling
       print(e);
+      showCustomSnackBar(
+        title: "Error signing up!!",
+        message: e.code,
+      );
       return "Error";
     } catch (e) {
       //TODO: add error handling
