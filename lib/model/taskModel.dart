@@ -5,24 +5,28 @@ class TaskModel {
   late String description;
   late DateTime eventDate;
   late String status;
+  late String id;
 
   TaskModel.name({
     required this.title,
     required this.description,
     required this.eventDate,
     required this.status,
+    required this.id,
   });
 
   Map<String, dynamic> toJson() => {
         'title': title,
         'description': description,
         'eventDate': eventDate,
-        'status': status
+        'status': status,
+        'id': id,
       };
 
   static TaskModel fromSnap(DocumentSnapshot documentSnapshot) {
     var snapshot = documentSnapshot.data() as Map<String, dynamic>;
     return TaskModel.name(
+      id: snapshot['id'],
       status: snapshot['status'],
       title: snapshot['title'],
       description: snapshot['description'],

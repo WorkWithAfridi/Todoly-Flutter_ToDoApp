@@ -115,10 +115,8 @@ class DashboardPage extends StatelessWidget {
               }
               if (snapshot.data!.docs.isEmpty) {
                 return Text(
-                  'Noting pending...',
-                  style: defaultTS.copyWith(
-                    color: greyColor,
-                  ),
+                  'You have no pending tasks, as of right now!',
+                  style: defaultTS.copyWith(color: greyColor, fontSize: 12),
                 );
               }
               return ListView.builder(

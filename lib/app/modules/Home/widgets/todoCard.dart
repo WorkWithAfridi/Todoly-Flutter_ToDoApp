@@ -15,7 +15,7 @@ class ToDoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => ShowTaskDetailsScreen());
+        Get.to(() => ShowTaskDetailsScreen(task: task,));
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 3),

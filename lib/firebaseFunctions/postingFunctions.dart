@@ -19,10 +19,12 @@ class FirebaseFunctions {
     try {
       String taskId = Uuid().v1();
       TaskModel taskModel = TaskModel.name(
-          title: title,
-          description: description,
-          eventDate: eventDate,
-          status: status);
+        id: taskId,
+        title: title,
+        description: description,
+        eventDate: eventDate,
+        status: status,
+      );
       firebaseFirestore
           .collection('users')
           .doc(authenticationModuleController.userModel.userId)
@@ -41,4 +43,13 @@ class FirebaseFunctions {
     }
   }
 
+  //Change task status
+  changeTaskStatus(String status, String taskId) {
+    firebaseFirestore
+        .collection('users')
+        .doc(authenticationModuleController.userModel.userId)
+        .collection('tasks')
+        .doc(taskId)
+        .update({'status': status});
+  }
 }
