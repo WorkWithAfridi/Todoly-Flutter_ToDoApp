@@ -6,8 +6,8 @@ import 'package:todoly/app/data/globalConstants.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:todoly/app/modules/Home/widgets/todoCard.dart';
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class Dashboard extends StatelessWidget {
               getPendingToDoList(),
               getCompletedToDoList(),
               const SizedBox(
-                height: 25,
+                height: 35,
               ),
             ],
           ),

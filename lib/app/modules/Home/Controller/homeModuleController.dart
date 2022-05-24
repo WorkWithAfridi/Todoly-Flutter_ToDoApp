@@ -9,6 +9,20 @@ class HomeModuleController {
   PageController mainframePageController = PageController(initialPage: 0);
   TextEditingController addATaskTitleTEC = TextEditingController();
   TextEditingController addATaskDescriptionTEC = TextEditingController();
+  var selectedEventDate = DateTime.now().obs;
+  var showSelectedDate = false.obs;
 
   //Functions
+  selectDate(BuildContext context) async {
+    var eventDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1998),
+      lastDate: DateTime(2100),
+    );
+    if (eventDate != null) {
+      selectedEventDate.value = eventDate;
+      showSelectedDate.value = true;
+    }
+  }
 }

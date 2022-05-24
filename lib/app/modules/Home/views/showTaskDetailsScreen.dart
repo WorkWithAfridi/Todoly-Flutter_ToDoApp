@@ -45,126 +45,127 @@ class ShowTaskDetailsScreen extends StatelessWidget {
       body: Container(
         height: Get.height,
         width: Get.width,
-        padding: EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Title',
-                style: defaultTS.copyWith(
-                  color: darkBlueColor,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Text('This is a title', style: defaultTS),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Description',
-                style: defaultTS.copyWith(
-                  color: darkBlueColor,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Text(
-                'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.',
-                style: defaultTS,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Event date',
-                style: defaultTS.copyWith(
-                  color: darkBlueColor,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Text(
-                "${DateFormat.MMMEd().format(DateTime.now())}",
-                style: defaultTS,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Status',
-                style: defaultTS.copyWith(
-                  color: darkBlueColor,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Container(
-                height: 55,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: primaryColor,
-                    width: 2,
-                  ),
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  'Active',
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Title',
                   style: defaultTS.copyWith(
-                    fontWeight: FontWeight.w800,
                     color: darkBlueColor,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 55,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: primaryColor,
-                    width: 2,
-                  ),
+                Text('This is a title', style: defaultTS),
+                const SizedBox(
+                  height: 10,
                 ),
-                alignment: Alignment.center,
-                child: Text(
-                  'Pending',
+                Text(
+                  'Description',
                   style: defaultTS.copyWith(
-                    fontWeight: FontWeight.w800,
                     color: darkBlueColor,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 55,
-                width: Get.width,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: primaryColor,
-                    width: 2,
-                  ),
+                Text(
+                  'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.',
+                  style: defaultTS,
                 ),
-                alignment: Alignment.center,
-                child: Text(
-                  'Completed',
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Event date',
                   style: defaultTS.copyWith(
-                    fontWeight: FontWeight.w800,
                     color: darkBlueColor,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
-              ),
-            ],
+                Text(
+                  "${DateFormat.MMMEd().format(DateTime.now())}",
+                  style: defaultTS,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Status',
+                  style: defaultTS.copyWith(
+                    color: darkBlueColor,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Container(
+                  height: 55,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: primaryColor,
+                      width: 2,
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Active',
+                    style: defaultTS.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: secondaryColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 55,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: primaryColor,
+                      width: 2,
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Pending',
+                    style: defaultTS.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: secondaryColor,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 55,
+                  width: Get.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: primaryColor,
+                      width: 2,
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Completed',
+                    style: defaultTS.copyWith(
+                      fontWeight: FontWeight.w800,
+                      color: secondaryColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

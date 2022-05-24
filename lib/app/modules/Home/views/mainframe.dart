@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:todoly/app/data/globalConstants.dart';
 import 'package:todoly/app/modules/Home/Controller/homeModuleController.dart';
+import 'package:todoly/app/modules/Home/views/pagesOnMainframe/completed.dart';
 import 'package:todoly/app/modules/Home/views/pagesOnMainframe/dashboard.dart';
 
 import '../../../globalWidgets/textField.dart';
 
-class Mainframe extends StatelessWidget {
+class Mainframe extends StatefulWidget {
   Mainframe({Key? key}) : super(key: key);
 
+  @override
+  State<Mainframe> createState() => _MainframeState();
+}
+
+class _MainframeState extends State<Mainframe> {
   final HomeModuleController controller = Get.find();
 
   @override
@@ -25,12 +32,8 @@ class Mainframe extends StatelessWidget {
           },
           controller: controller.mainframePageController,
           children: [
-            Dashboard(),
-            Container(
-              height: Get.height,
-              width: Get.width,
-              color: Colors.yellow,
-            ),
+            DashboardPage(),
+            CompletedPage(),
           ],
         ),
       ),
@@ -86,32 +89,16 @@ class Mainframe extends StatelessWidget {
   }
 
   void showAddATaskDialogPopUp() {
-    Get.defaultDialog(
-      title: "Adding a Task",
-      titleStyle: boldTS25.copyWith(fontSize: 18),
-      cancel: GestureDetector(
-        onTap: () {
-          Get.back();
-        },
-        child: Text(
-          'Cancel  ',
-          style: boldTS25.copyWith(
-            fontSize: 18,
-            color: Colors.red,
-          ),
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(
+          "Adding a Task",
+          style: boldTS25.copyWith(fontSize: 18),
         ),
-      ),
-      onConfirm: () {},
-      confirm: Text(
-        "  Save",
-        style: boldTS25.copyWith(fontSize: 18),
-      ),
-      content: Container(
-        width: Get.width * .85,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
-        child: Column(
+        scrollable: true,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        content: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -163,52 +150,108 @@ class Mainframe extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
-            Row(
-              children: [
-                Container(
-                  width: 100,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: primaryColor,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Today",
-                    style: defaultTS.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: whiteColor,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  width: 100,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: primaryColor,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Schedule",
-                    style: defaultTS.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: whiteColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            Obx(() {
+              return controller.showSelectedDate.value
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          DateFormat.MMMEd()
+                              .format(controller.selectedEventDate.value),
+                          style: boldTS25.copyWith(fontSize: 20),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.showSelectedDate.value = false;
+                          },
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            controller.selectedEventDate.value = DateTime.now();
+                            controller.showSelectedDate.value = true;
+                          },
+                          child: Container(
+                            width: 100,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: primaryColor,
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Today",
+                              style: defaultTS.copyWith(
+                                fontWeight: FontWeight.w800,
+                                color: whiteColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.selectDate(context);
+                          },
+                          child: Container(
+                            width: 100,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: primaryColor,
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "Schedule",
+                              style: defaultTS.copyWith(
+                                fontWeight: FontWeight.w800,
+                                color: whiteColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+            }),
             const SizedBox(
               height: 5,
             ),
           ],
         ),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Text(
+              'Cancel  ',
+              style: boldTS25.copyWith(
+                fontSize: 18,
+                color: Colors.red,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: Text(
+              'Save  ',
+              style: boldTS25.copyWith(
+                fontSize: 18,
+                color: primaryColor,
+              ),
+            ),
+          ),
+        ],
       ),
-      radius: 8,
     );
   }
 }
