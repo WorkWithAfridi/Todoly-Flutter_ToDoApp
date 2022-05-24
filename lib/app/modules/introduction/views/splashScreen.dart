@@ -6,18 +6,14 @@ import 'package:todoly/app/globalWidgets/appIcon.dart';
 
 import '../controllers/introductionModuleController.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatelessWidget {
+  SplashScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
   final controller = Get.find<IntroductionModuleController>();
 
   @override
   Widget build(BuildContext context) {
+    controller.triggerSplashScreen();
     return Scaffold(
       backgroundColor: secondaryColor,
       body: SizedBox(
@@ -43,11 +39,5 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controller.triggerSplashScreen();
   }
 }

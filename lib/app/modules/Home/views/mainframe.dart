@@ -9,14 +9,9 @@ import 'package:todoly/app/modules/Home/views/pagesOnMainframe/dashboard.dart';
 
 import '../../../globalWidgets/textField.dart';
 
-class Mainframe extends StatefulWidget {
+class Mainframe extends StatelessWidget {
   Mainframe({Key? key}) : super(key: key);
 
-  @override
-  State<Mainframe> createState() => _MainframeState();
-}
-
-class _MainframeState extends State<Mainframe> {
   final HomeModuleController controller = Get.find();
 
   @override
@@ -47,7 +42,9 @@ class _MainframeState extends State<Mainframe> {
       ),
       bottomNavigationBar: getBottonNavigationBar(),
       floatingActionButton: FloatingActionButton(
-        onPressed: showAddATaskDialogPopUp,
+        onPressed: () {
+          showAddATaskDialogPopUp(context);
+        },
         backgroundColor: primaryColor,
         child: const Icon(Icons.add),
       ),
@@ -96,7 +93,7 @@ class _MainframeState extends State<Mainframe> {
     });
   }
 
-  void showAddATaskDialogPopUp() {
+  void showAddATaskDialogPopUp(BuildContext context) {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(

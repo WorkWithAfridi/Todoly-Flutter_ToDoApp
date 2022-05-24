@@ -388,6 +388,7 @@ class DashboardPage extends StatelessWidget {
                           height: 1,
                           fontWeight: FontWeight.w800,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         authenticationModuleController.userModel.email,
@@ -396,6 +397,7 @@ class DashboardPage extends StatelessWidget {
                           fontSize: 15,
                           height: 1,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
