@@ -21,7 +21,7 @@ class IntroductionModuleController {
 
   //Checks if user is logged in or not
   void checkIfUserIsLoggedInOrNot() async {
-    if (await FirebaseAuth.instance.currentUser! != null) {
+    if (await FirebaseAuth.instance.currentUser != null) {
       final AuthenticationModuleController authenticationModuleController =
           Get.find();
       authenticationModuleController.userModel =

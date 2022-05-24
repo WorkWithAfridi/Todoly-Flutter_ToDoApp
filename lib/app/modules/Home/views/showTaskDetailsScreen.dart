@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todoly/app/modules/Home/Controller/homeModuleController.dart';
 import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 import 'package:todoly/firebaseFunctions/postingFunctions.dart';
 import 'package:todoly/model/taskModel.dart';
@@ -17,6 +18,8 @@ class ShowTaskDetailsScreen extends StatelessWidget {
 
   final AuthenticationModuleController authenticationModuleController =
       Get.find();
+
+  final HomeModuleController homeModuleController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,9 @@ class ShowTaskDetailsScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              homeModuleController.deleteTodoTask(task.id);
+            },
             icon: const Icon(
               Icons.delete_outline,
               color: Colors.red,

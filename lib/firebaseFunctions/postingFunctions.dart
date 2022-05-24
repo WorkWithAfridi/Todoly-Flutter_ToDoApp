@@ -52,4 +52,14 @@ class FirebaseFunctions {
         .doc(taskId)
         .update({'status': status});
   }
+
+  //Function to delete todo task from firebase
+  void deleteTodoTask(String taskId) {
+    firebaseFirestore
+        .collection('users')
+        .doc(authenticationModuleController.userModel.userId)
+        .collection('tasks')
+        .doc(taskId)
+        .delete();
+  }
 }

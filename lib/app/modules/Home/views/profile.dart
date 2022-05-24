@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 
 import '../../../data/globalConstants.dart';
 import '../../../globalWidgets/customBackButton.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+
+  final AuthenticationModuleController authenticationModuleController =
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +17,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Profile",
-          style: boldTS25.copyWith(
-            fontSize: 16,
-          ),
+          style: boldTS25.copyWith(fontSize: 16, color: whiteColor),
         ),
         leading: CustomBackButton(),
         backgroundColor: primaryColor,
@@ -30,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              height: 150,
+              height: 180,
               width: Get.width,
               color: primaryColor,
               child: Column(
@@ -55,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
               child: SizedBox.shrink(),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: authenticationModuleController.logoutUser,
               child: Text(
                 'Logout',
                 style: boldTS25.copyWith(color: primaryColor),

@@ -70,4 +70,15 @@ class HomeModuleController {
       );
     }
   }
+
+  //Delete a task
+  void deleteTodoTask(String id) {
+    FirebaseFunctions().deleteTodoTask(id);
+    Get.back();
+    Get.snackbar(
+      "Task deleted",
+      "Your task has been deleted from Todoly.",
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+    );
+  }
 }

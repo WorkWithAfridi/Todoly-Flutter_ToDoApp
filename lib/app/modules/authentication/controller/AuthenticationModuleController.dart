@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todoly/app/modules/authentication/views/signupScreen.dart';
@@ -85,5 +86,11 @@ class AuthenticationModuleController {
         margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       );
     }
+  }
+
+  //Function to signout/logout user
+  void logoutUser() {
+    FirebaseAuth.instance.signOut();
+    Get.offAllNamed(ROUTES.getLoginScreenRoute);
   }
 }

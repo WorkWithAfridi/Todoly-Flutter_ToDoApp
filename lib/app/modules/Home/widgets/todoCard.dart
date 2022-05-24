@@ -15,7 +15,9 @@ class ToDoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => ShowTaskDetailsScreen(task: task,));
+        Get.to(() => ShowTaskDetailsScreen(
+              task: task,
+            ));
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 3),
@@ -31,8 +33,12 @@ class ToDoCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const Icon(
-                  FontAwesomeIcons.clipboardCheck,
+                Icon(
+                  task.status == "Pending"
+                      ? FontAwesomeIcons.clipboard
+                      : task.status == "Active"
+                          ? FontAwesomeIcons.clipboardQuestion
+                          : FontAwesomeIcons.clipboardCheck,
                   color: primaryColor,
                 ),
                 const SizedBox(

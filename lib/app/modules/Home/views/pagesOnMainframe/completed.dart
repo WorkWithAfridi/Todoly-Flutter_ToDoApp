@@ -1,11 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 
+import '../../../../../model/taskModel.dart';
 import '../../../../data/globalConstants.dart';
+import '../../../../globalWidgets/customCircularProgressLoadingIndicator.dart';
 import '../../widgets/todoCard.dart';
 
 class CompletedPage extends StatelessWidget {
-  const CompletedPage({Key? key}) : super(key: key);
+  CompletedPage({Key? key}) : super(key: key);
+
+  final AuthenticationModuleController authenticationModuleController =
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +39,40 @@ class CompletedPage extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                // ListView.builder(
-                //   itemCount: 10,
-                //   shrinkWrap: true,
-                //   physics: NeverScrollableScrollPhysics(),
-                //   itemBuilder: (context, index) {
-                //     return ToDoCard();
-                //   },
-                // ),
+                StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(authenticationModuleController.userModel.userId)
+                      .collection('tasks')
+                      .where('status', isEqualTo: "Completed")
+                      .snapshots(),
+                  builder: (context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                          snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CustomCircularProgressLoadingIndicator();
+                    }
+                    if (snapshot.data!.docs.isEmpty) {
+                      return Text(
+                        'Nothing here...Zzzz',
+                        style:
+                            defaultTS.copyWith(color: greyColor, fontSize: 12),
+                      );
+                    }
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        TaskModel taskModel =
+                            TaskModel.fromSnap(snapshot.data!.docs[index]);
+                        return ToDoCard(
+                          task: taskModel,
+                        );
+                      },
+                    );
+                  },
+                ),
                 const SizedBox(
                   height: 30,
                 ),
