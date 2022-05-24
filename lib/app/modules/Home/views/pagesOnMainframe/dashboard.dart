@@ -1,14 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todoly/app/data/globalConstants.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/modules/Home/views/profile.dart';
 import 'package:todoly/app/modules/Home/widgets/todoCard.dart';
+import 'package:todoly/model/taskModel.dart';
+
+import '../../../authentication/controller/AuthenticationModuleController.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  DashboardPage({Key? key}) : super(key: key);
+  final AuthenticationModuleController authenticationModuleController =
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +48,8 @@ class DashboardPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,13 +101,42 @@ class DashboardPage extends StatelessWidget {
               )
             ],
           ),
-          ListView.builder(
-            itemCount: 3,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return ToDoCard();
+          StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(authenticationModuleController.userModel.userId)
+                .collection('tasks')
+                .where('status', isEqualTo: "Pending")
+                .snapshots(),
+            builder: (context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CustomCircularProgressLoadingIndicator();
+              }
+              if (snapshot.data!.docs.isEmpty) {
+                return Text(
+                  'Noting pending...',
+                  style: defaultTS.copyWith(
+                    color: greyColor,
+                  ),
+                );
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  TaskModel taskModel =
+                      TaskModel.fromSnap(snapshot.data!.docs[index]);
+                  return ToDoCard(
+                    task: taskModel,
+                  );
+                },
+              );
             },
+          ),
+          const SizedBox(
+            height: 10,
           )
         ],
       ),
@@ -111,6 +147,8 @@ class DashboardPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -162,13 +200,40 @@ class DashboardPage extends StatelessWidget {
               )
             ],
           ),
-          ListView.builder(
-            itemCount: 3,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return ToDoCard();
+          StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(authenticationModuleController.userModel.userId)
+                .collection('tasks')
+                .where('status', isEqualTo: "Completed")
+                .snapshots(),
+            builder: (context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CustomCircularProgressLoadingIndicator();
+              }
+              if (snapshot.data!.docs.length == 0) {
+                return Text(
+                  'Nothing here...Zzzz',
+                  style: defaultTS.copyWith(color: greyColor, fontSize: 12),
+                );
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  TaskModel taskModel =
+                      TaskModel.fromSnap(snapshot.data!.docs[index]);
+                  return ToDoCard(
+                    task: taskModel,
+                  );
+                },
+              );
             },
+          ),
+          const SizedBox(
+            height: 10,
           )
         ],
       ),
@@ -232,14 +297,41 @@ class DashboardPage extends StatelessWidget {
               )
             ],
           ),
-          ListView.builder(
-            itemCount: 3,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return ToDoCard();
+          StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(authenticationModuleController.userModel.userId)
+                .collection('tasks')
+                .where('status', isEqualTo: "Active")
+                .snapshots(),
+            builder: (context,
+                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return CustomCircularProgressLoadingIndicator();
+              }
+              if (snapshot.data!.docs.isEmpty) {
+                return Text(
+                  'No active tasks',
+                  style: defaultTS.copyWith(color: greyColor, fontSize: 12),
+                );
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  TaskModel taskModel =
+                      TaskModel.fromSnap(snapshot.data!.docs[index]);
+                  return ToDoCard(
+                    task: taskModel,
+                  );
+                },
+              );
             },
-          )
+          ),
+          const SizedBox(
+            height: 10,
+          ),
         ],
       ),
     );
@@ -259,7 +351,7 @@ class DashboardPage extends StatelessWidget {
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
@@ -270,6 +362,34 @@ class DashboardPage extends StatelessWidget {
                     backgroundImage: NetworkImage(
                         'https://images.unsplash.com/photo-1633332755192-727a05c4013d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880'),
                     radius: 30,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        authenticationModuleController.userModel.userName,
+                        style: defaultTS.copyWith(
+                          color: whiteColor,
+                          fontSize: 20,
+                          height: 1,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        authenticationModuleController.userModel.email,
+                        style: defaultTS.copyWith(
+                          color: whiteColor,
+                          fontSize: 15,
+                          height: 1,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const Icon(

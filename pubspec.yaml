@@ -43,6 +43,7 @@ dependencies:
   font_awesome_flutter: any
   intl: any
   timeago: any
+  uuid: any
 
 dev_dependencies:
   flutter_test:

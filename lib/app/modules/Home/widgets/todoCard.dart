@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:todoly/app/modules/Home/views/showTaskDetailsScreen.dart';
+import 'package:todoly/model/taskModel.dart';
 
 import '../../../data/globalConstants.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ToDoCard extends StatelessWidget {
-  const ToDoCard({Key? key}) : super(key: key);
+  final TaskModel task;
+  const ToDoCard({Key? key, required this.task}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class ToDoCard extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
           elevation: 0,
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             width: Get.width,
             height: 60,
             decoration: BoxDecoration(
@@ -29,21 +31,22 @@ class ToDoCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   FontAwesomeIcons.clipboardCheck,
                   color: primaryColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
                   child: Text(
-                    'Some important task that needs attentation!',
+                    task.title,
                     overflow: TextOverflow.ellipsis,
+                    style: defaultTS.copyWith(color: darkBlueColor),
                   ),
                 ),
                 Text(
-                  timeago.format(DateTime.now()),
+                  timeago.format(task.eventDate),
                   style: defaultTS.copyWith(
                     color: greyColor,
                     fontSize: 10,

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:todoly/model/taskModel.dart';
 
 import '../../../data/globalConstants.dart';
 import '../../../globalWidgets/customBackButton.dart';
 
 class ShowTaskDetailsScreen extends StatelessWidget {
-  const ShowTaskDetailsScreen({Key? key}) : super(key: key);
+  final TaskModel taskModel;
+  const ShowTaskDetailsScreen({Key? key, required this.taskModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todoly/app/data/globalConstants.dart';
+import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/modules/Home/Controller/homeModuleController.dart';
 import 'package:todoly/app/modules/Home/views/pagesOnMainframe/completed.dart';
 import 'package:todoly/app/modules/Home/views/pagesOnMainframe/dashboard.dart';
@@ -234,29 +235,55 @@ class _MainframeState extends State<Mainframe> {
             ),
           ],
         ),
+        actionsAlignment: MainAxisAlignment.center,
         actions: [
           GestureDetector(
             onTap: () {
               Get.back();
             },
-            child: Text(
-              'Cancel  ',
-              style: boldTS25.copyWith(
-                fontSize: 18,
-                color: Colors.red,
+            child: Container(
+              height: 40,
+              width: 80,
+              alignment: Alignment.center,
+              // decoration: BoxDecoration(
+              //   borderRadius: BorderRadius.circular(8),
+              //   border: Border.all(
+              //     color: Colors.red,
+              //     width: 2
+              //   ),
+              // ),
+              child: Text(
+                'Cancel  ',
+                style: boldTS25.copyWith(
+                  fontSize: 15,
+                  color: Colors.red,
+                ),
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {},
-            child: Text(
-              'Save  ',
-              style: boldTS25.copyWith(
-                fontSize: 18,
-                color: primaryColor,
+          Obx(() {
+            return GestureDetector(
+              onTap: controller.saveATask,
+              child: Container(
+                height: 40,
+                width: 80,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: primaryColor,
+                ),
+                alignment: Alignment.center,
+                child: controller.showLoadingAnimationInAddATaskPopup.value
+                    ? const CustomCircularProgressLoadingIndicator()
+                    : Text(
+                        'Save  ',
+                        style: boldTS25.copyWith(
+                          fontSize: 15,
+                          color: whiteColor,
+                        ),
+                      ),
               ),
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

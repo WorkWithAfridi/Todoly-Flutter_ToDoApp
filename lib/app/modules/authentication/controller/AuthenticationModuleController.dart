@@ -34,7 +34,7 @@ class AuthenticationModuleController {
     await Future.delayed(const Duration(seconds: 2));
     String email = loginEmailTEC.value.text;
     String password = loginPasswordTEC.value.text;
-    if (email.isNotEmpty || password.isNotEmpty) {
+    if (email.isNotEmpty && password.isNotEmpty) {
       String isLoginSuccessful = await AuthenticationFunctions()
           .loginUser(email: email, password: password);
       if (isLoginSuccessful == "Success") {
@@ -61,9 +61,9 @@ class AuthenticationModuleController {
     String email = signupEmailTEC.value.text;
     String password = signupPasswordTEC.value.text;
     String phone = signupUserPhoneTEC.value.text;
-    if (phone.isNotEmpty ||
-        userName.isNotEmpty ||
-        email.isNotEmpty ||
+    if (phone.isNotEmpty &&
+        userName.isNotEmpty &&
+        email.isNotEmpty &&
         password.isNotEmpty) {
       showSignupButtonLoadingAnimation.value = true;
       await Future.delayed(const Duration(seconds: 2));

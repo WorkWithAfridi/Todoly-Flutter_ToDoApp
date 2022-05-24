@@ -32,14 +32,14 @@ class CompletedPage extends StatelessWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                ListView.builder(
-                  itemCount: 10,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return ToDoCard();
-                  },
-                ),
+                // ListView.builder(
+                //   itemCount: 10,
+                //   shrinkWrap: true,
+                //   physics: NeverScrollableScrollPhysics(),
+                //   itemBuilder: (context, index) {
+                //     return ToDoCard();
+                //   },
+                // ),
                 const SizedBox(
                   height: 30,
                 ),

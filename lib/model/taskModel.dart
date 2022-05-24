@@ -26,7 +26,7 @@ class TaskModel {
       status: snapshot['status'],
       title: snapshot['title'],
       description: snapshot['description'],
-      eventDate: snapshot['eventDate'],
+      eventDate: (snapshot['eventDate'] as Timestamp).toDate(),
     );
   }
 }
