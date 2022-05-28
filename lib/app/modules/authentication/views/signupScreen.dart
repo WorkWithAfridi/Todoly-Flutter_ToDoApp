@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:todoly/app/data/globalConstants.dart';
-import 'package:todoly/app/globalWidgets/appIcon.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/globalWidgets/customBackButton.dart';
 import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/globalWidgets/textField.dart';
@@ -20,16 +19,16 @@ class SignupScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "New user?",
-          style: boldTS25.copyWith(
-            fontSize: 16,
+          style: getBoldTextStyle.copyWith(
+            color: Get.theme.colorScheme.primary,
           ),
         ),
         leading: CustomBackButton(),
-        backgroundColor: whiteColor,
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
         centerTitle: true,
         elevation: 0,
       ),
-      backgroundColor: whiteColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 20),
         height: Get.height,
@@ -42,12 +41,17 @@ class SignupScreen extends StatelessWidget {
             children: [
               Text(
                 "Create an account.",
-                style: boldTS25.copyWith(fontSize: 20),
+                style: getBoldTextStyle.copyWith(
+                  fontSize: 20,
+                  color: Get.theme.primaryColor,
+                ),
               ),
               Text(
-                "Hi, please create the app to continue using the app!",
-                style: defaultTS.copyWith(
-                  color: greyColor,
+                "Hi, please create an account to continue using the app!",
+                style: getDefaultTextStyle.copyWith(
+                  color:
+                      Get.isDarkMode ? greyColor : blackColor.withOpacity(.6),
+                  fontSize: 14,
                 ),
               ),
               const SizedBox(
@@ -65,16 +69,16 @@ class SignupScreen extends StatelessWidget {
                     width: Get.width / 2,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                        customBorderRadius,
+                        7,
                       ),
-                      color: orangeColor,
+                      color: Get.theme.colorScheme.primary,
                     ),
                     alignment: Alignment.center,
                     child: controller.showSignupButtonLoadingAnimation.value
                         ? CustomCircularProgressLoadingIndicator()
                         : Text(
                             'Signup',
-                            style: defaultTS.copyWith(
+                            style: getBoldTextStyle.copyWith(
                                 color: whiteColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w800),
@@ -103,8 +107,8 @@ class SignupScreen extends StatelessWidget {
       children: [
         Text(
           'USERNAME',
-          style: defaultTS.copyWith(
-            color: darkBlueColor,
+          style: getDefaultTextStyle.copyWith(
+            color: Get.theme.primaryColor,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -122,8 +126,8 @@ class SignupScreen extends StatelessWidget {
         ),
         Text(
           'EMAIL ADDRESS',
-          style: defaultTS.copyWith(
-            color: darkBlueColor,
+          style: getDefaultTextStyle.copyWith(
+            color: Get.theme.primaryColor,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -141,8 +145,8 @@ class SignupScreen extends StatelessWidget {
         ),
         Text(
           'PASSWORD',
-          style: defaultTS.copyWith(
-            color: darkBlueColor,
+          style: getDefaultTextStyle.copyWith(
+            color: Get.theme.primaryColor,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -161,8 +165,8 @@ class SignupScreen extends StatelessWidget {
         ),
         Text(
           'PHONE',
-          style: defaultTS.copyWith(
-            color: darkBlueColor,
+          style: getDefaultTextStyle.copyWith(
+            color: Get.theme.primaryColor,
             fontWeight: FontWeight.w800,
           ),
         ),
@@ -186,8 +190,8 @@ class SignupScreen extends StatelessWidget {
       children: [
         Text(
           'Or signup using',
-          style: defaultTS.copyWith(
-            color: greyColor,
+          style: getDefaultTextStyle.copyWith(
+            color: Get.isDarkMode ? greyColor : blackColor.withOpacity(.6),
           ),
         ),
         const SizedBox(

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../data/globalConstants.dart';
+import '../../../data/theme/theme.dart';
 
 class CustomPageIndicator extends StatelessWidget {
   final indicatorPosition;
   final currentPageIndex;
-  const CustomPageIndicator({Key? key, required this.indicatorPosition, required this.currentPageIndex}) : super(key: key);
+  const CustomPageIndicator(
+      {Key? key,
+      required this.indicatorPosition,
+      required this.currentPageIndex})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +19,11 @@ class CustomPageIndicator extends StatelessWidget {
       width: currentPageIndex == indicatorPosition ? 15 : 10,
       decoration: BoxDecoration(
         color: currentPageIndex == indicatorPosition
-            ? secondaryColor
+            ? Get.theme.colorScheme.primary
             : greyColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      duration: customDuration,
+      duration: const Duration(milliseconds: 400),
     );
   }
 }

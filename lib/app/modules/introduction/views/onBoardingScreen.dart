@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/globalWidgets/appIcon.dart';
 import 'package:todoly/app/modules/introduction/controllers/introductionModuleController.dart';
 import 'package:todoly/app/modules/introduction/widgets/pageIndicator.dart';
-
-import '../../../data/globalConstants.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   OnBoardingScreen({Key? key}) : super(key: key);
@@ -16,7 +14,7 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: whiteColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Container(
         height: Get.height,
         width: Get.width,
@@ -33,9 +31,8 @@ class OnBoardingScreen extends StatelessWidget {
             ),
             Text(
               "Get things done.",
-              style: boldTS25.copyWith(
-                color: secondaryColor,
-              ),
+              style: getBoldTextStyle.copyWith(
+                  color: Get.theme.colorScheme.primary, fontSize: 20),
             ),
             getPageText(),
             const SizedBox(
@@ -47,7 +44,7 @@ class OnBoardingScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         elevation: 0,
-        backgroundColor: orangeColor,
+        backgroundColor: Get.theme.colorScheme.primary,
         onPressed: controller.onNextButtonClick,
         child: const Icon(
           FontAwesomeIcons.arrowRight,
@@ -70,7 +67,10 @@ class OnBoardingScreen extends StatelessWidget {
                     : controller.currentPageIndex.value == 2
                         ? "Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat."
                         : "Hello",
-            style: defaultTS.copyWith(color: greyColor),
+            style: getDefaultTextStyle.copyWith(
+              color: greyColor,
+              fontSize: 14,
+            ),
           ),
         );
       },

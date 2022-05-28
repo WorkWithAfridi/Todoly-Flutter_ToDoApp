@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todoly/app/data/theme/theme.dart';
+import 'package:todoly/app/data/theme/themeService.dart';
 import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 
-import '../../../data/globalConstants.dart';
 import '../../../globalWidgets/customBackButton.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -17,13 +18,14 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Profile",
-          style: boldTS25.copyWith(fontSize: 16, color: whiteColor),
+          style: getBoldTextStyle,
         ),
         leading: CustomBackButton(),
-        backgroundColor: secondaryColor,
+        backgroundColor: Get.theme.colorScheme.primary,
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Container(
         height: Get.height,
         width: Get.width,
@@ -34,11 +36,11 @@ class ProfileScreen extends StatelessWidget {
             Container(
               height: 180,
               width: Get.width,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    secondaryColor,
-                    primaryColor,
+                    Get.theme.colorScheme.primary,
+                    Get.theme.colorScheme.secondary,
                   ],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -57,19 +59,55 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Text(
                     "Khondakar Afridi",
-                    style: boldTS25.copyWith(color: whiteColor),
-                  )
+                    style: getBoldTextStyle.copyWith(
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    "Khondakarafridi35@gmail.com",
+                    style: getSubtitleTextStyle.copyWith(
+                      height: .9,
+                    ),
+                  ),
                 ],
               ),
             ),
-            const Expanded(
-              child: SizedBox.shrink(),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Theme:",
+                          style: getDefaultTextStyle.copyWith(
+                              color: Get.isDarkMode ? whiteColor : blackColor),
+                        ),
+                        Switch(
+                          value: Get.isDarkMode,
+                          onChanged: (_) {
+                            ThemeService().changeThemeMode();
+                          },
+                          activeColor: Get.theme.colorScheme.primary,
+                          inactiveTrackColor: Get.theme.colorScheme.secondary,
+                          inactiveThumbColor: Get.theme.colorScheme.primary,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
             ),
             GestureDetector(
               onTap: authenticationModuleController.logoutUser,
               child: Text(
                 'Logout',
-                style: boldTS25.copyWith(color: primaryColor),
+                style: getBoldTextStyle.copyWith(
+                  color: Get.theme.colorScheme.primary,
+                  fontSize: 20,
+                ),
               ),
             ),
             const SizedBox(

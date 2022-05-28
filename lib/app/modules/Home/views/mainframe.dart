@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:todoly/app/data/globalConstants.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/modules/Home/Controller/homeModuleController.dart';
 import 'package:todoly/app/modules/Home/views/pagesOnMainframe/completed.dart';
@@ -17,11 +17,11 @@ class Mainframe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainframeScaffoldColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(0),
+        preferredSize: const Size.fromHeight(0),
         child: AppBar(
-          backgroundColor: primaryColor,
+          backgroundColor: Get.theme.colorScheme.primary,
           elevation: 0,
         ),
       ),
@@ -29,7 +29,7 @@ class Mainframe extends StatelessWidget {
         height: Get.height,
         width: Get.width,
         child: PageView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (value) {
             controller.currentPageIndexOnMainframe.value = value;
           },
@@ -40,32 +40,35 @@ class Mainframe extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: getBottonNavigationBar(),
+      bottomNavigationBar: getBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showAddATaskDialogPopUp(context);
         },
-        backgroundColor: primaryColor,
-        child: const Icon(Icons.add),
+        backgroundColor: Get.theme.colorScheme.primary,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
-  Obx getBottonNavigationBar() {
+  Obx getBottomNavigationBar() {
     return Obx(() {
       return BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: secondaryColor,
+        selectedItemColor: Get.theme.colorScheme.primary,
         unselectedItemColor: greyColor,
-        backgroundColor: whiteColor,
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
         elevation: 6,
         currentIndex: controller.currentPageIndexOnMainframe.value,
         onTap: (value) {
           controller.currentPageIndexOnMainframe.value = value;
           controller.mainframePageController.animateToPage(
             value,
-            duration: customDuration,
+            duration: const Duration(milliseconds: 400),
             curve: Curves.linearToEaseOut,
           );
         },
@@ -74,7 +77,7 @@ class Mainframe extends StatelessWidget {
             icon: Icon(
               Icons.checklist,
               color: controller.currentPageIndexOnMainframe.value == 0
-                  ? primaryColor
+                  ? Get.theme.colorScheme.primary
                   : greyColor,
             ),
             label: "Dashboard",
@@ -83,7 +86,7 @@ class Mainframe extends StatelessWidget {
             icon: Icon(
               Icons.calendar_today,
               color: controller.currentPageIndexOnMainframe.value == 1
-                  ? primaryColor
+                  ? Get.theme.colorScheme.primary
                   : greyColor,
             ),
             label: "Completed",
@@ -99,12 +102,15 @@ class Mainframe extends StatelessWidget {
       builder: (_) => AlertDialog(
         title: Text(
           "Adding a Task",
-          style: boldTS25.copyWith(fontSize: 18),
+          style: getBoldTextStyle.copyWith(
+            color: Get.theme.colorScheme.primary,
+          ),
         ),
         scrollable: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
         content: SizedBox(
           width: Get.width,
           child: Column(
@@ -113,9 +119,8 @@ class Mainframe extends StatelessWidget {
             children: [
               Text(
                 'Title',
-                style: defaultTS.copyWith(
-                  color: darkBlueColor,
-                  fontWeight: FontWeight.w800,
+                style: getBoldTextStyle.copyWith(
+                  color: Get.theme.colorScheme.primary,
                 ),
               ),
               const SizedBox(
@@ -132,9 +137,8 @@ class Mainframe extends StatelessWidget {
               ),
               Text(
                 'Description',
-                style: defaultTS.copyWith(
-                  color: darkBlueColor,
-                  fontWeight: FontWeight.w800,
+                style: getBoldTextStyle.copyWith(
+                  color: Get.theme.colorScheme.primary,
                 ),
               ),
               const SizedBox(
@@ -151,9 +155,8 @@ class Mainframe extends StatelessWidget {
               ),
               Text(
                 'Event date',
-                style: defaultTS.copyWith(
-                  color: darkBlueColor,
-                  fontWeight: FontWeight.w800,
+                style: getBoldTextStyle.copyWith(
+                  color: Get.theme.colorScheme.primary,
                 ),
               ),
               const SizedBox(
@@ -167,15 +170,17 @@ class Mainframe extends StatelessWidget {
                           Text(
                             DateFormat.MMMEd()
                                 .format(controller.selectedEventDate.value),
-                            style: boldTS25.copyWith(fontSize: 20),
+                            style: getBoldTextStyle.copyWith(
+                              color: Get.isDarkMode ? whiteColor : blackColor,
+                            ),
                           ),
                           GestureDetector(
                             onTap: () {
                               controller.showSelectedDate.value = false;
                             },
-                            child: const Icon(
+                            child: Icon(
                               Icons.close,
-                              color: Colors.red,
+                              color: Get.theme.colorScheme.error,
                             ),
                           ),
                         ],
@@ -193,15 +198,12 @@ class Mainframe extends StatelessWidget {
                               height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: primaryColor,
+                                color: Get.theme.colorScheme.primary,
                               ),
                               alignment: Alignment.center,
                               child: Text(
                                 "Today",
-                                style: defaultTS.copyWith(
-                                  fontWeight: FontWeight.w800,
-                                  color: whiteColor,
-                                ),
+                                style: getBoldTextStyle,
                               ),
                             ),
                           ),
@@ -217,15 +219,12 @@ class Mainframe extends StatelessWidget {
                               height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: primaryColor,
+                                color: Get.theme.colorScheme.primary,
                               ),
                               alignment: Alignment.center,
                               child: Text(
                                 "Schedule",
-                                style: defaultTS.copyWith(
-                                  fontWeight: FontWeight.w800,
-                                  color: whiteColor,
-                                ),
+                                style: getBoldTextStyle,
                               ),
                             ),
                           ),
@@ -248,18 +247,10 @@ class Mainframe extends StatelessWidget {
               height: 40,
               width: 80,
               alignment: Alignment.center,
-              // decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.circular(8),
-              //   border: Border.all(
-              //     color: Colors.red,
-              //     width: 2
-              //   ),
-              // ),
               child: Text(
                 'Cancel  ',
-                style: boldTS25.copyWith(
-                  fontSize: 15,
-                  color: Colors.red,
+                style: getBoldTextStyle.copyWith(
+                  color: errorColor,
                 ),
               ),
             ),
@@ -272,17 +263,14 @@ class Mainframe extends StatelessWidget {
                 width: 80,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: primaryColor,
+                  color: Get.theme.colorScheme.secondary,
                 ),
                 alignment: Alignment.center,
                 child: controller.showLoadingAnimationInAddATaskPopup.value
                     ? const CustomCircularProgressLoadingIndicator()
                     : Text(
-                        'Save  ',
-                        style: boldTS25.copyWith(
-                          fontSize: 15,
-                          color: whiteColor,
-                        ),
+                        'Save',
+                        style: getBoldTextStyle,
                       ),
               ),
             );

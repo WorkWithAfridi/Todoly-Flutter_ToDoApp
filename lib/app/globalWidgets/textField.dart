@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoly/app/data/globalConstants.dart';
+import 'package:get/get.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController TEC;
@@ -19,8 +20,10 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      style: defaultTS,
-      cursorColor: primaryColor,
+      style: getDefaultTextStyle.copyWith(
+        color: Get.isDarkMode ? darkPrimaryColor : blackColor,
+      ),
+      cursorColor: Get.theme.colorScheme.primary,
       controller: TEC,
       maxLines: maxLines,
       obscureText: isPassword,
@@ -28,8 +31,10 @@ class CustomTextField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: defaultTS.copyWith(
-          color: greyColor.withOpacity(.7),
+        hintStyle: getDefaultTextStyle.copyWith(
+          color: Get.isDarkMode
+              ? darkPrimaryColor.withOpacity(.6)
+              : blackColor.withOpacity(.6),
         ),
         border: OutlineInputBorder(
           borderSide: Divider.createBorderSide(
@@ -38,17 +43,17 @@ class CustomTextField extends StatelessWidget {
             width: .5,
           ),
           borderRadius: BorderRadius.circular(
-            customBorderRadius,
+            7,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: Divider.createBorderSide(
             context,
-            color: secondaryColor,
+            color: Get.theme.colorScheme.primary,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(
-            customBorderRadius,
+            7,
           ),
         ),
         enabledBorder: OutlineInputBorder(
@@ -58,7 +63,7 @@ class CustomTextField extends StatelessWidget {
             width: .5,
           ),
           borderRadius: BorderRadius.circular(
-            customBorderRadius,
+            7,
           ),
         ),
         fillColor: greyColor.withOpacity(.1),

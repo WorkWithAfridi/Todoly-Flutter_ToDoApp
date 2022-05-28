@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/modules/Home/views/showTaskDetailsScreen.dart';
 import 'package:todoly/model/taskModel.dart';
 
-import '../../../data/globalConstants.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ToDoCard extends StatelessWidget {
@@ -22,7 +22,9 @@ class ToDoCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 3),
         child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
           elevation: 0,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -39,7 +41,7 @@ class ToDoCard extends StatelessWidget {
                       : task.status == "Active"
                           ? FontAwesomeIcons.clipboardQuestion
                           : FontAwesomeIcons.clipboardCheck,
-                  color: primaryColor,
+                  color: Get.isDarkMode ? darkPrimaryColor : lightPrimaryColor,
                 ),
                 const SizedBox(
                   width: 10,
@@ -48,14 +50,17 @@ class ToDoCard extends StatelessWidget {
                   child: Text(
                     task.title,
                     overflow: TextOverflow.ellipsis,
-                    style: defaultTS.copyWith(color: darkBlueColor),
+                    style: getDefaultTextStyle.copyWith(
+                      color: Get.isDarkMode ? darkPrimaryColor : darkBlueColor,
+                    ),
                   ),
                 ),
                 Text(
                   timeago.format(task.eventDate),
-                  style: defaultTS.copyWith(
-                    color: greyColor,
-                    fontSize: 10,
+                  style: getSubtitleTextStyle.copyWith(
+                    color: Get.isDarkMode
+                        ? whiteColor.withOpacity(.6)
+                        : blackColor.withOpacity(.6),
                   ),
                 ),
               ],

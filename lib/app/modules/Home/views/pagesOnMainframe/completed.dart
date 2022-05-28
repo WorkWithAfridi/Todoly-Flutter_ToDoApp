@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 
 import '../../../../../model/taskModel.dart';
-import '../../../../data/globalConstants.dart';
+import '../../../../data/theme/theme.dart';
 import '../../../../globalWidgets/customCircularProgressLoadingIndicator.dart';
 import '../../widgets/todoCard.dart';
 
@@ -22,7 +22,7 @@ class CompletedPage extends StatelessWidget {
         width: Get.width,
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,14 +30,26 @@ class CompletedPage extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "Completed Tasks",
-                  style: boldTS25.copyWith(
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
+                Row(
+                  children: [
+                    Container(
+                      height: 15,
+                      width: 15,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.green,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      'Completed Tasks',
+                      style: getBoldTextStyle.copyWith(
+                        color: Get.isDarkMode ? getPrimaryColor : darkBlueColor,
+                      ),
+                    ),
+                  ],
                 ),
                 StreamBuilder(
                   stream: FirebaseFirestore.instance
@@ -50,13 +62,13 @@ class CompletedPage extends StatelessWidget {
                       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                           snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CustomCircularProgressLoadingIndicator();
+                      return const CustomCircularProgressLoadingIndicator();
                     }
                     if (snapshot.data!.docs.isEmpty) {
                       return Text(
-                        'Nothing here...Zzzz',
-                        style:
-                            defaultTS.copyWith(color: greyColor, fontSize: 12),
+                        'You have not completed any tasks yet!!',
+                        style: getDefaultTextStyle.copyWith(
+                            color: greyColor, fontSize: 12),
                       );
                     }
                     return ListView.builder(

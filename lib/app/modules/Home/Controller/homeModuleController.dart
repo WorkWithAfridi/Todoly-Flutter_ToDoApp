@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todoly/app/data/globalConstants.dart';
-import 'package:todoly/app/globalWidgets/textField.dart';
 import 'package:todoly/firebaseFunctions/postingFunctions.dart';
 
 import '../../../globalWidgets/snackbar.dart';

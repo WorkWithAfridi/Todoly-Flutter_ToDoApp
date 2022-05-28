@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/globalConstants.dart';
+import '../../../data/theme/theme.dart';
 
 class CustomSocialMediaButtons extends StatelessWidget {
   final IconData icon;
   final Function? onTap;
   final Color color;
-  const CustomSocialMediaButtons({Key? key, required this.icon, required this.onTap, required this.color}) : super(key: key);
+  const CustomSocialMediaButtons(
+      {Key? key, required this.icon, required this.onTap, required this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

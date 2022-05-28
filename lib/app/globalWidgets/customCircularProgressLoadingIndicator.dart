@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoly/app/data/globalConstants.dart';
+
+import '../data/theme/theme.dart';
 
 class CustomCircularProgressLoadingIndicator extends StatelessWidget {
   const CustomCircularProgressLoadingIndicator({Key? key}) : super(key: key);

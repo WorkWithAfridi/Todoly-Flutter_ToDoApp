@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:todoly/app/data/globalConstants.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/globalWidgets/appIcon.dart';
 
 import '../controllers/introductionModuleController.dart';
@@ -15,7 +14,9 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     controller.triggerSplashScreen();
     return Scaffold(
-      backgroundColor: secondaryColor,
+      backgroundColor: Get.isDarkMode
+          ? Get.theme.scaffoldBackgroundColor
+          : Get.theme.colorScheme.primary,
       body: SizedBox(
         height: Get.height,
         width: Get.width,
@@ -31,8 +32,8 @@ class SplashScreen extends StatelessWidget {
             ),
             Text(
               "Todoly",
-              style: boldTS25.copyWith(
-                color: whiteColor,
+              style: getBoldTextStyle.copyWith(
+                fontSize: 20,
               ),
             ),
           ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:todoly/app/data/globalConstants.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/globalWidgets/appIcon.dart';
 import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/globalWidgets/textField.dart';
@@ -16,12 +16,12 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: whiteColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Container(
           height: Get.height,
           width: Get.width,
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               Expanded(
@@ -37,18 +37,17 @@ class LoginScreen extends StatelessWidget {
                       AppIcon(
                         size: Get.width / 4.5,
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
                       Text(
                         "Login",
-                        style: boldTS25.copyWith(fontSize: 20),
+                        style: getBoldTextStyle.copyWith(
+                          fontSize: 25,
+                          color: Get.theme.primaryColor,
+                        ),
                       ),
                       Text(
                         "Please login to continue using the app.",
-                        style: defaultTS.copyWith(
-                          color: greyColor,
-                        ),
+                        style: getDefaultTextStyle.copyWith(
+                            color: Get.isDarkMode? greyColor: blackColor.withOpacity(.6), fontSize: 14),
                       ),
                       const SizedBox(
                         height: 15,
@@ -65,9 +64,9 @@ class LoginScreen extends StatelessWidget {
                             width: Get.width / 2,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
-                                customBorderRadius,
+                                7,
                               ),
-                              color: secondaryColor,
+                              color: Get.theme.colorScheme.primary,
                             ),
                             alignment: Alignment.center,
                             child: controller
@@ -75,10 +74,7 @@ class LoginScreen extends StatelessWidget {
                                 ? const CustomCircularProgressLoadingIndicator()
                                 : Text(
                                     'Login',
-                                    style: defaultTS.copyWith(
-                                        color: whiteColor,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w800),
+                                    style: getBoldTextStyle,
                                   ),
                           ),
                         );
@@ -104,14 +100,14 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: "Don't have an account? ",
-                        style: defaultTS.copyWith(
-                          color: greyColor,
+                        style: getDefaultTextStyle.copyWith(
+                          color: Get.isDarkMode? greyColor: blackColor.withOpacity(.6),
                         ),
                       ),
                       TextSpan(
                         text: "Get Started!",
-                        style: defaultTS.copyWith(
-                          color: orangeColor,
+                        style: getDefaultTextStyle.copyWith(
+                          color: Get.theme.colorScheme.primary,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -136,8 +132,8 @@ class LoginScreen extends StatelessWidget {
       children: [
         Text(
           'Or login with',
-          style: defaultTS.copyWith(
-            color: greyColor,
+          style: getDefaultTextStyle.copyWith(
+            color: Get.isDarkMode? greyColor: blackColor.withOpacity(.6),
           ),
         ),
         const SizedBox(
@@ -174,8 +170,8 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Container getLoginForm() {
-    return Container(
+  Widget getLoginForm() {
+    return SizedBox(
       width: Get.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -183,8 +179,8 @@ class LoginScreen extends StatelessWidget {
         children: [
           Text(
             'EMAIL ADDRESS',
-            style: defaultTS.copyWith(
-              color: darkBlueColor,
+            style: getDefaultTextStyle.copyWith(
+              color: Get.theme.colorScheme.primary,
               fontWeight: FontWeight.w800,
             ),
           ),
@@ -202,8 +198,8 @@ class LoginScreen extends StatelessWidget {
           ),
           Text(
             'PASSWORD',
-            style: defaultTS.copyWith(
-              color: darkBlueColor,
+            style: getDefaultTextStyle.copyWith(
+              color: Get.theme.colorScheme.primary,
               fontWeight: FontWeight.w800,
             ),
           ),

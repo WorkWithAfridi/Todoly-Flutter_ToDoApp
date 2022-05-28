@@ -2,19 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:todoly/app/data/globalConstants.dart';
 import 'package:todoly/app/globalWidgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/modules/Home/views/profile.dart';
 import 'package:todoly/app/modules/Home/views/searchScreen.dart';
 import 'package:todoly/app/modules/Home/widgets/todoCard.dart';
 import 'package:todoly/model/taskModel.dart';
 
+import '../../../../data/theme/theme.dart';
 import '../../../authentication/controller/AuthenticationModuleController.dart';
 
 class DashboardPage extends StatelessWidget {
   DashboardPage({Key? key}) : super(key: key);
   final AuthenticationModuleController authenticationModuleController =
       Get.find();
+
+  Color getPrimaryColor = Get.theme.colorScheme.primary;
+  Color getSecondaryColor = Get.theme.colorScheme.secondary;
+  Color getScaffoldColor = Get.theme.scaffoldBackgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +74,10 @@ class DashboardPage extends StatelessWidget {
                   ),
                   Text(
                     'Pending To-Dos',
-                    style: defaultTS.copyWith(
-                      color: darkBlueColor,
-                      fontWeight: FontWeight.w800,
+                    style: getBoldTextStyle.copyWith(
+                      color: Get.isDarkMode ? getPrimaryColor : darkBlueColor,
                     ),
-                  ),
+                  )
                 ],
               ),
               Row(
@@ -117,7 +120,10 @@ class DashboardPage extends StatelessWidget {
               if (snapshot.data!.docs.isEmpty) {
                 return Text(
                   'You have no pending tasks, as of right now!',
-                  style: defaultTS.copyWith(color: greyColor, fontSize: 12),
+                  style: getDefaultTextStyle.copyWith(
+                    color: greyColor,
+                    fontSize: 12,
+                  ),
                 );
               }
               return ListView.builder(
@@ -167,9 +173,8 @@ class DashboardPage extends StatelessWidget {
                   ),
                   Text(
                     'Completed',
-                    style: defaultTS.copyWith(
-                      color: darkBlueColor,
-                      fontWeight: FontWeight.w800,
+                    style: getBoldTextStyle.copyWith(
+                      color: Get.isDarkMode ? getPrimaryColor : darkBlueColor,
                     ),
                   ),
                 ],
@@ -213,8 +218,9 @@ class DashboardPage extends StatelessWidget {
               }
               if (snapshot.data!.docs.length == 0) {
                 return Text(
-                  'Nothing here...Zzzz',
-                  style: defaultTS.copyWith(color: greyColor, fontSize: 12),
+                  'You have not completed any tasks yet!!',
+                  style: getDefaultTextStyle.copyWith(
+                      color: greyColor, fontSize: 12),
                 );
               }
               return ListView.builder(
@@ -264,9 +270,8 @@ class DashboardPage extends StatelessWidget {
                   ),
                   Text(
                     'Active',
-                    style: defaultTS.copyWith(
-                      color: darkBlueColor,
-                      fontWeight: FontWeight.w800,
+                    style: getBoldTextStyle.copyWith(
+                      color: Get.isDarkMode ? getPrimaryColor : darkBlueColor,
                     ),
                   ),
                 ],
@@ -311,7 +316,8 @@ class DashboardPage extends StatelessWidget {
               if (snapshot.data!.docs.isEmpty) {
                 return Text(
                   'No active tasks',
-                  style: defaultTS.copyWith(color: greyColor, fontSize: 12),
+                  style: getDefaultTextStyle.copyWith(
+                      color: greyColor, fontSize: 12),
                 );
               }
               return ListView.builder(
@@ -339,11 +345,11 @@ class DashboardPage extends StatelessWidget {
   Container getCustomAppBar() {
     return Container(
       height: 150,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            secondaryColor,
-            primaryColor,
+            Get.theme.colorScheme.primary,
+            Get.theme.colorScheme.secondary,
           ],
           begin: Alignment.bottomLeft,
           end: Alignment.topRight,
@@ -366,10 +372,11 @@ class DashboardPage extends StatelessWidget {
                   onTap: () {
                     Get.to(() => ProfileScreen());
                   },
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     backgroundImage: NetworkImage(
                         'https://images.unsplash.com/photo-1633332755192-727a05c4013d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880'),
                     radius: 30,
+                    backgroundColor: Get.theme.colorScheme.primary,
                   ),
                 ),
                 const SizedBox(
@@ -382,21 +389,14 @@ class DashboardPage extends StatelessWidget {
                     children: [
                       Text(
                         authenticationModuleController.userModel.userName,
-                        style: defaultTS.copyWith(
-                          color: whiteColor,
+                        style: getBoldTextStyle.copyWith(
                           fontSize: 20,
-                          height: 1,
-                          fontWeight: FontWeight.w800,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
                         authenticationModuleController.userModel.email,
-                        style: defaultTS.copyWith(
-                          color: whiteColor,
-                          fontSize: 15,
-                          height: 1,
-                        ),
+                        style: getSubtitleTextStyle.copyWith(height: .9),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],
@@ -410,12 +410,12 @@ class DashboardPage extends StatelessWidget {
                     height: 50,
                     width: 50,
                     decoration: BoxDecoration(
-                      color: whiteColor.withOpacity(.1),
+                      color: Get.theme.scaffoldBackgroundColor.withOpacity(.1),
                       borderRadius: BorderRadius.circular(50),
                     ),
                     child: Icon(
                       Icons.search,
-                      color: whiteColor,
+                      color: Get.theme.scaffoldBackgroundColor,
                     ),
                   ),
                 ),
@@ -430,15 +430,11 @@ class DashboardPage extends StatelessWidget {
               children: [
                 Text(
                   "Today, ${DateFormat.MMMEd().format(DateTime.now())}.",
-                  style: defaultTS.copyWith(
-                    color: whiteColor.withOpacity(.7),
-                    fontSize: 15,
-                  ),
+                  style: getSubtitleTextStyle.copyWith(height: .9),
                 ),
                 Text(
                   "Todoly Dashboard",
-                  style: defaultTS.copyWith(
-                      color: whiteColor, fontSize: 25, height: 1),
+                  style: getBoldTextStyle.copyWith(fontSize: 20),
                 ),
               ],
             ),

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/modules/Home/Controller/homeModuleController.dart';
 import 'package:todoly/app/modules/authentication/controller/AuthenticationModuleController.dart';
 
 import '../../../../model/taskModel.dart';
-import '../../../data/globalConstants.dart';
 import '../../../globalWidgets/customBackButton.dart';
 import '../../../globalWidgets/customCircularProgressLoadingIndicator.dart';
 import '../widgets/todoCard.dart';
@@ -20,30 +20,29 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Search",
-          style: boldTS25.copyWith(fontSize: 16, color: whiteColor),
-        ),
+        title: Text("Search", style: getBoldTextStyle),
         leading: CustomBackButton(),
-        backgroundColor: secondaryColor,
+        backgroundColor: Get.theme.colorScheme.secondary,
         centerTitle: true,
         elevation: 0,
       ),
-      backgroundColor: whiteColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           getSearchBar(context),
           Expanded(
-            child: Obx(() {
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: homeModuleController.showSearchResults.value
-                    ? getSearchResults()
-                    : const SizedBox.shrink(),
-              );
-            }),
+            child: Obx(
+              () {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: homeModuleController.showSearchResults.value
+                      ? getSearchResults()
+                      : const SizedBox.shrink(),
+                );
+              },
+            ),
           )
         ],
       ),
@@ -60,8 +59,8 @@ class SearchScreen extends StatelessWidget {
         ),
         Text(
           "Search Results",
-          style: boldTS25.copyWith(
-            fontSize: 20,
+          style: getBoldTextStyle.copyWith(
+            color: Get.isDarkMode ? whiteColor : Get.theme.colorScheme.primary,
           ),
         ),
         Expanded(
@@ -77,13 +76,10 @@ class SearchScreen extends StatelessWidget {
                     AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
                         snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CustomCircularProgressLoadingIndicator();
+                    return const SizedBox.shrink();
                   }
                   if (snapshot.data!.docs.isEmpty) {
-                    return Text(
-                      'No active tasks',
-                      style: defaultTS.copyWith(color: greyColor, fontSize: 12),
-                    );
+                    return const SizedBox.shrink();
                   }
                   return ListView.builder(
                     shrinkWrap: true,
@@ -113,7 +109,7 @@ class SearchScreen extends StatelessWidget {
 
   Container getSearchBar(BuildContext context) {
     return Container(
-      color: secondaryColor,
+      color: Get.theme.colorScheme.secondary,
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -123,7 +119,7 @@ class SearchScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: TextField(
-                  style: defaultTS.copyWith(color: whiteColor),
+                  style: getDefaultTextStyle,
                   cursorColor: whiteColor,
                   controller: homeModuleController.searchTEC,
                   maxLines: 1,
@@ -132,9 +128,7 @@ class SearchScreen extends StatelessWidget {
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     hintText: "Enter a query...",
-                    hintStyle: defaultTS.copyWith(
-                      color: whiteColor.withOpacity(.7),
-                    ),
+                    hintStyle: getSubtitleTextStyle,
                     border: OutlineInputBorder(
                       borderSide: Divider.createBorderSide(
                         context,
@@ -142,7 +136,7 @@ class SearchScreen extends StatelessWidget {
                         width: .5,
                       ),
                       borderRadius: BorderRadius.circular(
-                        customBorderRadius,
+                        7,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -152,7 +146,7 @@ class SearchScreen extends StatelessWidget {
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(
-                        customBorderRadius,
+                        7,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
@@ -162,7 +156,7 @@ class SearchScreen extends StatelessWidget {
                         width: .5,
                       ),
                       borderRadius: BorderRadius.circular(
-                        customBorderRadius,
+                        7,
                       ),
                     ),
                     fillColor: whiteColor.withOpacity(.1),
