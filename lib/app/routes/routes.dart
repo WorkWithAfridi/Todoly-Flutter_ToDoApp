@@ -1,18 +1,17 @@
 import 'package:get/get.dart';
-import 'package:todoly/app/modules/Home/Binding/homeModuleBinding.dart';
-import 'package:todoly/app/modules/Home/views/mainframe.dart';
-import 'package:todoly/app/modules/authentication/binding/AuthenticationModuleBinding.dart';
-import 'package:todoly/app/modules/authentication/views/loginScreen.dart';
-import 'package:todoly/app/modules/authentication/views/signupScreen.dart';
-import 'package:todoly/app/modules/introduction/binding/introductionModuleBinding.dart';
-import 'package:todoly/app/modules/introduction/views/onBoardingScreen.dart';
-import 'package:todoly/app/modules/introduction/views/splashScreen.dart';
+import 'package:todoly/app/controllers/bindings/homeModuleBinding.dart';
+import 'package:todoly/app/controllers/bindings/authenticationModuleBinding.dart';
+import 'package:todoly/app/controllers/bindings/introductionModuleBinding.dart';
+import 'package:todoly/app/views/auth/loginScreen.dart';
+import 'package:todoly/app/views/home/homescreen.dart';
+import 'package:todoly/app/views/onboarding/onBoardingScreen.dart';
+import 'package:todoly/app/views/onboarding/splashScreen.dart';
 
 class ROUTES {
-  static get getSplashScreenRoute => "/introduction/splashscreen";
-  static get getOnBoardingScreenRoute => "/introduction/onboardingscreen";
-  static get getLoginScreenRoute => '/authentication/loginscreeb';
-  static get getHomeScreenRoute => '/home/mainframe';
+  static get getSplashScreenRoute => "/onboarding/splashscreen";
+  static get getOnBoardingScreenRoute => "/onboarding/onboardingscreen";
+  static get getLoginScreenRoute => '/auth/loginscreeb';
+  static get getHomeScreenRoute => '/home/homescreen';
   static List<GetPage> routes = [
     GetPage(
       name: getSplashScreenRoute,
@@ -31,7 +30,7 @@ class ROUTES {
     ),
     GetPage(
       name: getHomeScreenRoute,
-      page: () => Mainframe(),
+      page: () => Homescreen(),
       binding: HomeModuleBinding(),
     ),
   ];
