@@ -4,7 +4,7 @@ import 'package:todoly/app/controllers/authenticationModuleController.dart';
 import 'package:todoly/app/data/models/taskModel.dart';
 import 'package:uuid/uuid.dart';
 
-class FirebaseFunctions {
+class PostingFunctions {
   //Variables
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   final AuthenticationModuleController authenticationModuleController =
@@ -54,12 +54,40 @@ class FirebaseFunctions {
   }
 
   //Function to delete todo task from firebase
-  void deleteTodoTask(String taskId) {
-    firebaseFirestore
+  Future<void> deleteTodoTask(String taskId) async {
+    await firebaseFirestore
         .collection('users')
         .doc(authenticationModuleController.userModel.userId)
         .collection('tasks')
         .doc(taskId)
         .delete();
+    return;
+  }
+
+  //delete user data
+  Future<void> deleteUserData() async {
+    firebaseFirestore
+        .collection('users')
+        .doc(authenticationModuleController.userModel.userId)
+        .collection('tasks')
+        .get()
+        .then(
+      (snapshot) async {
+        List<TaskModel> toBeDeletedTasks = [];
+        snapshot.docs.every(
+          (element) {
+            TaskModel tempTaskModel = TaskModel.fromSnap(element);
+            toBeDeletedTasks.add(tempTaskModel);
+            return true;
+          },
+        );
+        toBeDeletedTasks.forEach(
+          (task) async {
+            await deleteTodoTask(task.id);
+          },
+        );
+        return;
+      },
+    );
   }
 }

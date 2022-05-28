@@ -101,4 +101,17 @@ class AuthenticationModuleController {
     FirebaseAuth.instance.signOut();
     Get.offAllNamed(ROUTES.getLoginScreenRoute);
   }
+
+  //Function to delete user
+  void deleteUser() async {
+    String success = await AuthenticationFunctions().deleteUser();
+
+    if (success == "Success") {
+      logoutUser();
+      showCustomSnackBar(
+        title: "Bye! :)",
+        message: "Your user profile has been deleted!",
+      );
+    }
+  }
 }

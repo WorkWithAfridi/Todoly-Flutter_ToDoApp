@@ -39,7 +39,7 @@ class HomeModuleController {
         showSelectedDate.value == true) {
       showLoadingAnimationInAddATaskPopup.value = true;
       await Future.delayed(const Duration(seconds: 2));
-      String postedSuccessfully = await FirebaseFunctions().addATask(
+      String postedSuccessfully = await PostingFunctions().addATask(
         title: title,
         description: description,
         eventDate: selectedEventDate.value,
@@ -72,8 +72,8 @@ class HomeModuleController {
   }
 
   //Delete a task
-  void deleteTodoTask(String id) {
-    FirebaseFunctions().deleteTodoTask(id);
+  void deleteTodoTask(String id) async {
+    await PostingFunctions().deleteTodoTask(id);
     Get.back();
     showCustomSnackBar(
       title: "Task deleted",
@@ -85,5 +85,13 @@ class HomeModuleController {
   void clearScreenInSearchPage() {
     showSearchResults.value = false;
     searchTEC.text = '';
+  }
+
+  //delete user data()
+  void deleteUserData() async {
+    await PostingFunctions().deleteUserData();
+    showCustomSnackBar(
+        title: "Success",
+        message: "Done! You're relived of all of your todos. :)");
   }
 }

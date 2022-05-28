@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todoly/app/controllers/authenticationModuleController.dart';
+import 'package:todoly/app/controllers/homeModuleController.dart';
 import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/data/theme/themeService.dart';
-import 'package:todoly/app/controllers/authenticationModuleController.dart';
 
 import '../widgets/customBackButton.dart';
 
@@ -11,6 +12,7 @@ class ProfileScreen extends StatelessWidget {
 
   final AuthenticationModuleController authenticationModuleController =
       Get.find();
+  final HomeModuleController homeModuleController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -134,9 +136,11 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        homeModuleController.deleteUserData();
+                      },
                       child: Text(
-                        "Delete account data",
+                        "Delete user data",
                         style: getDefaultTextStyle.copyWith(
                           color: Get.isDarkMode
                               ? darkPrimaryColor
@@ -148,7 +152,9 @@ class ProfileScreen extends StatelessWidget {
                       height: 5,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        authenticationModuleController.deleteUser();
+                      },
                       child: Text(
                         "Delete account",
                         style: getDefaultTextStyle.copyWith(

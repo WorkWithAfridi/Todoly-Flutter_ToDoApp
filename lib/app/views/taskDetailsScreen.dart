@@ -146,7 +146,7 @@ class ShowTaskDetailsScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            FirebaseFunctions()
+                            PostingFunctions()
                                 .changeTaskStatus("Active", taskModel.id);
                           },
                           child: Container(
@@ -178,7 +178,7 @@ class ShowTaskDetailsScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            FirebaseFunctions()
+                            PostingFunctions()
                                 .changeTaskStatus("Pending", taskModel.id);
                           },
                           child: Container(
@@ -210,7 +210,7 @@ class ShowTaskDetailsScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            FirebaseFunctions()
+                            PostingFunctions()
                                 .changeTaskStatus("Completed", taskModel.id);
                           },
                           child: Container(

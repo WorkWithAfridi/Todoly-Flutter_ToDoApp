@@ -80,4 +80,26 @@ class AuthenticationFunctions {
       return "Error";
     }
   }
+
+  Future<String> deleteUser() async {
+    try {
+      final AuthenticationModuleController authenticationModuleController =
+          Get.find();
+
+      await firebaseFirestore
+          .collection('users')
+          .doc(authenticationModuleController.userModel.userId)
+          .delete();
+      await firebaseAuth.currentUser!.delete();
+      return "Success";
+    } on FirebaseAuthException catch (e) {
+      //TODO: add error handling
+      print(e);
+      return "Error";
+    } catch (e) {
+      //TODO: add error handling
+      print(e);
+      return "Error";
+    }
+  }
 }
