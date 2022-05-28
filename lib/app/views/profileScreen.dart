@@ -75,27 +75,89 @@ class ProfileScreen extends StatelessWidget {
             Expanded(
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
+                width: double.maxFinite,
+                height: double.maxFinite,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Settings',
+                      style: getBoldTextStyle.copyWith(
+                        fontSize: 20,
+                        color: Get.isDarkMode ? whiteColor : darkBlueColor,
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "Theme:",
                           style: getDefaultTextStyle.copyWith(
-                              color: Get.isDarkMode ? whiteColor : blackColor),
+                            color: Get.isDarkMode
+                                ? whiteColor.withOpacity(.8)
+                                : blackColor.withOpacity(.8),
+                          ),
                         ),
-                        Switch(
-                          value: Get.isDarkMode,
-                          onChanged: (_) {
-                            ThemeService().changeThemeMode();
-                          },
-                          activeColor: Get.theme.colorScheme.primary,
-                          inactiveTrackColor: Get.theme.colorScheme.secondary,
-                          inactiveThumbColor: Get.theme.colorScheme.primary,
+                        SizedBox(
+                          height: 30,
+                          child: Switch(
+                            value: Get.isDarkMode,
+                            onChanged: (_) {
+                              ThemeService().changeThemeMode();
+                            },
+                            activeColor: Get.theme.colorScheme.primary,
+                            inactiveTrackColor: Get.theme.colorScheme.secondary,
+                            inactiveThumbColor: Get.theme.colorScheme.primary,
+                          ),
                         ),
                       ],
-                    )
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Divider(
+                      color: greyColor,
+                      height: 1,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Account',
+                      style: getBoldTextStyle.copyWith(
+                        fontSize: 20,
+                        color: Get.isDarkMode ? whiteColor : darkBlueColor,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        "Delete account data",
+                        style: getDefaultTextStyle.copyWith(
+                          color: Get.isDarkMode
+                              ? darkPrimaryColor
+                              : lightPrimaryColor,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        "Delete account",
+                        style: getDefaultTextStyle.copyWith(
+                          color: Get.isDarkMode
+                              ? darkPrimaryColor
+                              : lightPrimaryColor,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
