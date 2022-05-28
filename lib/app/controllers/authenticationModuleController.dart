@@ -77,6 +77,10 @@ class AuthenticationModuleController {
           userName: userName, email: email, password: password, phone: phone);
       if (isSignupSuccessful == 'Success') {
         userModel = await AuthenticationFunctions().getUserData();
+        signupUserNameTEC.text = '';
+        signupEmailTEC.text = '';
+        signupUserPhoneTEC.text = '';
+        signupPasswordTEC.text = '';
         showSignupButtonLoadingAnimation.value = false;
         Get.offAllNamed(ROUTES.getHomeScreenRoute);
       } else {
