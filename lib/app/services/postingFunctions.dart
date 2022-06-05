@@ -73,20 +73,10 @@ class PostingFunctions {
         .get()
         .then(
       (snapshot) async {
-        List<TaskModel> toBeDeletedTasks = [];
-        snapshot.docs.every(
-          (element) {
-            TaskModel tempTaskModel = TaskModel.fromSnap(element);
-            toBeDeletedTasks.add(tempTaskModel);
-            return true;
-          },
-        );
-        toBeDeletedTasks.forEach(
-          (task) async {
-            await deleteTodoTask(task.id);
-          },
-        );
-        return;
+        for (var element in snapshot.docs) {
+          TaskModel tempTaskModel = TaskModel.fromSnap(element);
+          await deleteTodoTask(tempTaskModel.id);
+        }
       },
     );
   }
