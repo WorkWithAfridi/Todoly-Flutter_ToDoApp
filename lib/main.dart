@@ -11,7 +11,7 @@ main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await GetStorage.init();
-  runApp(TodolyApp());
+  runApp(const TodolyApp());
 }
 
 class TodolyApp extends StatelessWidget {

@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/controllers/homeModuleController.dart';
 import 'package:todoly/app/controllers/authenticationModuleController.dart';
-import 'package:todoly/app/services/postingFunctions.dart';
+import 'package:todoly/app/services/postFunctions.dart';
 import 'package:todoly/app/data/models/taskModel.dart';
 import '../widgets/customBackButton.dart';
 import '../widgets/customCircularProgressLoadingIndicator.dart';

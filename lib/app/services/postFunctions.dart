@@ -1,14 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
-import 'package:todoly/app/controllers/authenticationModuleController.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:todoly/app/data/models/taskModel.dart';
 import 'package:uuid/uuid.dart';
 
 class PostingFunctions {
   //Variables
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-  final AuthenticationModuleController authenticationModuleController =
-      Get.find();
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   //Adding a task to backend
   Future<String> addATask(
@@ -27,19 +25,15 @@ class PostingFunctions {
       );
       firebaseFirestore
           .collection('users')
-          .doc(authenticationModuleController.userModel.userId)
+          .doc(firebaseAuth.currentUser!.uid)
           .collection('tasks')
           .doc(taskId)
           .set(taskModel.toJson());
       return "Success";
     } on FirebaseException catch (e) {
-      //TODO: add error handling
-      print(e);
-      return "Error";
+      return e.message.toString();
     } catch (e) {
-      //TODO: add error handling
-      print(e);
-      return "Error";
+      return "An error occurred while trying to store your task! Please try again later.";
     }
   }
 
@@ -47,7 +41,7 @@ class PostingFunctions {
   changeTaskStatus(String status, String taskId) {
     firebaseFirestore
         .collection('users')
-        .doc(authenticationModuleController.userModel.userId)
+        .doc(firebaseAuth.currentUser!.uid)
         .collection('tasks')
         .doc(taskId)
         .update({'status': status});
@@ -57,7 +51,7 @@ class PostingFunctions {
   Future<void> deleteTodoTask(String taskId) async {
     await firebaseFirestore
         .collection('users')
-        .doc(authenticationModuleController.userModel.userId)
+        .doc(firebaseAuth.currentUser!.uid)
         .collection('tasks')
         .doc(taskId)
         .delete();
@@ -68,16 +62,18 @@ class PostingFunctions {
   Future<void> deleteUserData() async {
     firebaseFirestore
         .collection('users')
-        .doc(authenticationModuleController.userModel.userId)
+        .doc(firebaseAuth.currentUser!.uid)
         .collection('tasks')
         .get()
         .then(
       (snapshot) async {
+        TaskModel tempTaskModel;
         for (var element in snapshot.docs) {
-          TaskModel tempTaskModel = TaskModel.fromSnap(element);
+          tempTaskModel = TaskModel.fromSnap(element);
           await deleteTodoTask(tempTaskModel.id);
         }
       },
     );
   }
+  
 }

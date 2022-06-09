@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todoly/app/services/postingFunctions.dart';
+import 'package:todoly/app/services/postFunctions.dart';
 
 import '../widgets/snackbar.dart';
 

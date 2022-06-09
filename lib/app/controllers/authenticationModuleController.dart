@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todoly/app/constants/constants.dart';
 import 'package:todoly/app/widgets/snackbar.dart';
 import 'package:todoly/app/routes/routes.dart';
 import 'package:todoly/app/views/auth/signupScreen.dart';
@@ -31,31 +32,29 @@ class AuthenticationModuleController {
     );
   }
 
-  void onLoginButtonClick() async {
+  onLoginButtonClick() async {
     String email = loginEmailTEC.value.text;
     String password = loginPasswordTEC.value.text;
     if (email.isNotEmpty && password.isNotEmpty) {
       showLoginButtonLoadingAnimation.value = true;
-      await Future.delayed(const Duration(seconds: 2));
-      String isLoginSuccessful = await AuthenticationFunctions()
+      await Future.delayed(waitTime);
+      var result = await AuthenticationFunctions()
           .loginUser(email: email, password: password);
-      if (isLoginSuccessful == "Success") {
-        showLoginButtonLoadingAnimation.value = false;
+      if (result == "Success") {
+        userModel = await AuthenticationFunctions().getUserData();
         loginEmailTEC.text = '';
         loginPasswordTEC.text = '';
         Get.offAllNamed(ROUTES.getHomeScreenRoute);
       } else {
-        showLoginButtonLoadingAnimation.value = false;
         showCustomSnackBar(
           title: "Error",
-          message:
-              "Sorry an error occurred while trying to sign you in! Please try again later. :(",
+          message: result.toString(),
         );
       }
-    } else {
       showLoginButtonLoadingAnimation.value = false;
+    } else {
       showCustomSnackBar(
-        title: "Error logging in!!",
+        title: "Error!",
         message: "User credentials cannot be left empty. :(",
       );
     }
@@ -73,26 +72,21 @@ class AuthenticationModuleController {
         password.isNotEmpty) {
       showSignupButtonLoadingAnimation.value = true;
       await Future.delayed(const Duration(seconds: 2));
-      String isSignupSuccessful = await AuthenticationFunctions().signUpUser(
+      String result = await AuthenticationFunctions().signUpUser(
           userName: userName, email: email, password: password, phone: phone);
-      if (isSignupSuccessful == 'Success') {
+      if (result == 'Success') {
         userModel = await AuthenticationFunctions().getUserData();
-        signupUserNameTEC.text = '';
-        signupEmailTEC.text = '';
-        signupUserPhoneTEC.text = '';
-        signupPasswordTEC.text = '';
-        showSignupButtonLoadingAnimation.value = false;
+        signupUserNameTEC.text = signupPasswordTEC.text =
+            signupEmailTEC.text = signupUserPhoneTEC.text = '';
         Get.offAllNamed(ROUTES.getHomeScreenRoute);
       } else {
-        showSignupButtonLoadingAnimation.value = false;
         showCustomSnackBar(
           title: "Error",
-          message:
-              "Sorry an error occurred while trying to sign you up! Please try again later. :(",
+          message: result,
         );
       }
-    } else {
       showSignupButtonLoadingAnimation.value = false;
+    } else {
       showCustomSnackBar(
         title: "Error signing up!!",
         message: "User credentials cannot be left empty. :(",
@@ -109,7 +103,6 @@ class AuthenticationModuleController {
   //Function to delete user
   void deleteUser() async {
     String success = await AuthenticationFunctions().deleteUser();
-
     if (success == "Success") {
       logoutUser();
       showCustomSnackBar(
