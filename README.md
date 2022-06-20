@@ -16,7 +16,7 @@ UI Design: https://www.behance.net/gallery/124541301/To-Do-List-App-UI-Design?tr
 
 [ToDoly Demo Video](https://youtu.be/5tz1u_DJPsc)
 
-![Demo Image](insertLinkHere?raw=true)
+![Demo Image](https://github.com/llKYOTOll/Todoly-ATodoApp/blob/master/assets/promotional_images/Screenshot%202022-06-20%20162005.png?raw=true)
 
 ## How to install the app on your physical device
 
