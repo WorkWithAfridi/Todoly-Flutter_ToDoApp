@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/widgets/appIcon.dart';
 import 'package:todoly/app/widgets/customCircularProgressLoadingIndicator.dart';
@@ -16,110 +17,134 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 30,
+              width: 30,
+              child: Lottie.asset(
+                "assets/lottieAnimations/appIconAnimation.json",
+                repeat: false,
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              "Todoly",
+              style: getBoldTextStyle.copyWith(
+                color: Get.theme.colorScheme.primary,
+              ),
+            ),
+          ],
+        ),
+        centerTitle: true,
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
+        elevation: 0,
+      ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Container(
-          height: Get.height,
-          width: Get.width,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: Get.height * .1,
+      body: Container(
+        height: Get.height,
+        width: Get.width,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Login",
+                      style: getBoldTextStyle.copyWith(
+                        fontSize: 25,
+                        color: Get.theme.primaryColor,
                       ),
-                      AppIcon(
-                        size: Get.width / 4.5,
-                      ),
-                      Text(
-                        "Login",
-                        style: getBoldTextStyle.copyWith(
-                          fontSize: 25,
-                          color: Get.theme.primaryColor,
-                        ),
-                      ),
-                      Text(
-                        "Please login to continue using the app.",
-                        style: getDefaultTextStyle.copyWith(
-                            color: Get.isDarkMode? greyColor: blackColor.withOpacity(.6), fontSize: 14),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      getLoginForm(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Obx(() {
-                        return GestureDetector(
-                          onTap: controller.onLoginButtonClick,
-                          child: Container(
-                            height: 55,
-                            width: Get.width / 2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                7,
-                              ),
-                              color: Get.theme.colorScheme.primary,
+                    ),
+                    Text(
+                      "Please login to continue using the app.",
+                      style: getDefaultTextStyle.copyWith(
+                          color: Get.isDarkMode
+                              ? greyColor
+                              : blackColor.withOpacity(.6),
+                          fontSize: 14),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    getLoginForm(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Obx(() {
+                      return GestureDetector(
+                        onTap: controller.onLoginButtonClick,
+                        child: Container(
+                          height: 55,
+                          width: Get.width / 2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              7,
                             ),
-                            alignment: Alignment.center,
-                            child: controller
-                                    .showLoginButtonLoadingAnimation.value
-                                ? const CustomCircularProgressLoadingIndicator()
-                                : Text(
-                                    'Login',
-                                    style: getBoldTextStyle,
-                                  ),
+                            color: Get.theme.colorScheme.primary,
                           ),
-                        );
-                      }),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      getSocialMediaTab(),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
+                          alignment: Alignment.center,
+                          child: controller
+                                  .showLoginButtonLoadingAnimation.value
+                              ? const CustomCircularProgressLoadingIndicator()
+                              : Text(
+                                  'Login',
+                                  style: getBoldTextStyle,
+                                ),
+                        ),
+                      );
+                    }),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    getSocialMediaTab(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              GestureDetector(
-                onTap: controller.onSignupOnLoginPageButtonClick,
-                child: RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "Don't have an account? ",
-                        style: getDefaultTextStyle.copyWith(
-                          color: Get.isDarkMode? greyColor: blackColor.withOpacity(.6),
-                        ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            GestureDetector(
+              onTap: controller.onSignupOnLoginPageButtonClick,
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Don't have an account? ",
+                      style: getDefaultTextStyle.copyWith(
+                        color: Get.isDarkMode
+                            ? greyColor
+                            : blackColor.withOpacity(.6),
                       ),
-                      TextSpan(
-                        text: "Get Started!",
-                        style: getDefaultTextStyle.copyWith(
-                          color: Get.theme.colorScheme.primary,
-                          fontWeight: FontWeight.w800,
-                        ),
+                    ),
+                    TextSpan(
+                      text: "Get Started!",
+                      style: getDefaultTextStyle.copyWith(
+                        color: Get.theme.colorScheme.primary,
+                        fontWeight: FontWeight.w800,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
         ),
       ),
     );
@@ -128,19 +153,19 @@ class LoginScreen extends StatelessWidget {
   Column getSocialMediaTab() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Or login with',
           style: getDefaultTextStyle.copyWith(
-            color: Get.isDarkMode? greyColor: blackColor.withOpacity(.6),
+            color: Get.isDarkMode ? greyColor : blackColor.withOpacity(.6),
           ),
         ),
         const SizedBox(
           height: 5,
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomSocialMediaButtons(
@@ -180,7 +205,7 @@ class LoginScreen extends StatelessWidget {
           Text(
             'EMAIL ADDRESS',
             style: getDefaultTextStyle.copyWith(
-              color: Get.theme.colorScheme.primary,
+              color: Get.theme.primaryColor,
               fontWeight: FontWeight.w800,
             ),
           ),
@@ -199,7 +224,7 @@ class LoginScreen extends StatelessWidget {
           Text(
             'PASSWORD',
             style: getDefaultTextStyle.copyWith(
-              color: Get.theme.colorScheme.primary,
+              color: Get.theme.primaryColor,
               fontWeight: FontWeight.w800,
             ),
           ),

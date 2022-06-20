@@ -49,7 +49,7 @@ class ShowTaskDetailsScreen extends StatelessWidget {
             child: IconButton(
               onPressed: () {},
               icon: Icon(
-                Icons.save,
+                Icons.edit,
                 color: Get.theme.colorScheme.primary,
                 size: 25,
               ),
@@ -129,7 +129,9 @@ class ShowTaskDetailsScreen extends StatelessWidget {
                         Text(
                           "${DateFormat.MMMEd().format(taskModel.eventDate)}",
                           style: getDefaultTextStyle.copyWith(
-                            color: Get.isDarkMode ? whiteColor : blackColor,
+                            color: Get.isDarkMode
+                                ? whiteColor.withOpacity(.6)
+                                : blackColor.withOpacity(.6),
                           ),
                         ),
                         const SizedBox(

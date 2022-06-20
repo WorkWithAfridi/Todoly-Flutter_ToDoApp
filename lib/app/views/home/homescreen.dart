@@ -9,10 +9,21 @@ import 'package:todoly/app/views/home/dashboardPage.dart';
 
 import '../../widgets/customTextField.dart';
 
-class Homescreen extends StatelessWidget {
-  Homescreen({Key? key}) : super(key: key);
+class Homescreen extends StatefulWidget {
+  const Homescreen({Key? key}) : super(key: key);
 
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
   final HomeModuleController controller = Get.find();
+
+  @override
+  void dispose() {
+    Get.delete<HomeModuleController>();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +115,7 @@ class Homescreen extends StatelessWidget {
           "Adding a Task",
           style: getBoldTextStyle.copyWith(
             color: Get.theme.colorScheme.primary,
+            fontSize: 20,
           ),
         ),
         scrollable: true,
@@ -159,74 +171,87 @@ class Homescreen extends StatelessWidget {
                   color: Get.theme.colorScheme.primary,
                 ),
               ),
-              const SizedBox(
-                height: 5,
-              ),
               Obx(() {
                 return controller.showSelectedDate.value
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    ? Column(
                         children: [
-                          Text(
-                            DateFormat.MMMEd()
-                                .format(controller.selectedEventDate.value),
-                            style: getBoldTextStyle.copyWith(
-                              color: Get.isDarkMode ? whiteColor : blackColor,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                DateFormat.MMMEd()
+                                    .format(controller.selectedEventDate.value),
+                                style: getDefaultTextStyle.copyWith(
+                                  color: Get.isDarkMode
+                                      ? whiteColor.withOpacity(.6)
+                                      : blackColor.withOpacity(.6),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.showSelectedDate.value = false;
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: Get.theme.colorScheme.error,
+                                ),
+                              ),
+                            ],
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.showSelectedDate.value = false;
-                            },
-                            child: Icon(
-                              Icons.close,
-                              color: Get.theme.colorScheme.error,
-                            ),
+                          const SizedBox(
+                            height: 15,
                           ),
                         ],
                       )
-                    : Row(
+                    : Column(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              controller.selectedEventDate.value =
-                                  DateTime.now();
-                              controller.showSelectedDate.value = true;
-                            },
-                            child: Container(
-                              width: 100,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Get.theme.colorScheme.primary,
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Today",
-                                style: getBoldTextStyle,
-                              ),
-                            ),
-                          ),
                           const SizedBox(
-                            width: 10,
+                            height: 5,
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.selectDate(context);
-                            },
-                            child: Container(
-                              width: 100,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Get.theme.colorScheme.primary,
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  controller.selectedEventDate.value =
+                                      DateTime.now();
+                                  controller.showSelectedDate.value = true;
+                                },
+                                child: Container(
+                                  width: 100,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Get.theme.colorScheme.primary,
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Today",
+                                    style: getBoldTextStyle,
+                                  ),
+                                ),
                               ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Schedule",
-                                style: getBoldTextStyle,
+                              const SizedBox(
+                                width: 10,
                               ),
-                            ),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.selectDate(context);
+                                },
+                                child: Container(
+                                  width: 100,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Get.theme.colorScheme.primary,
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Schedule",
+                                    style: getBoldTextStyle,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       );

@@ -1,21 +1,23 @@
-Todoly.
+# Todoly
 
-A To-Do App built using Flutter, Firebase, and GetX. 
-Users can store their tasks here, review them at a later date, change their status and even search old tasks, all in one single app with dynamic theming - light mode and dark mode.
+## A full-stack ToDo App using Flutter, Firebase & GetX.
 
-Made with:
-State management - Getx. 
-Backend - Firebase. 
+A full stack ToDo app with Light and Dark mode, where users can login/ signup and store their Todos and have access to them across all platforms.
+
+*User Authentication using Firebase Authentication
+*Backend using Firebase Cloud Firestore
+*State management using GetX
+*Image compressor and Image cropping achieved using packages from pub.dev
+
 UI inspired by: Mailin Hülsmann's design from Behance - with necessary modifications and adjustments.
 UI Design: https://www.behance.net/gallery/124541301/To-Do-List-App-UI-Design?tracking_source=search_projects%7CTo%20do%20app . 
-Theme management - Getx Theme and Getx Storage - light mode and dark mode. 
 
-Project architecture: MVC.
+## Demo video and in-app screenshots
 
-Demo user email: kyoto@gmail.com & password: 123456. 
+[ToDoly Demo Video](https://youtu.be/5tz1u_DJPsc)
 
-Or you can create your own account and fill it up with data. :)
+![Demo Image](insertLinkHere?raw=true)
 
-*Please use a 6+ digit password while signing up, or else the app will throw an error since firebase doesn't accept passwords that are less that 6 digits long and Firebase Exceptions Errors were not handled!
+## How to install the app on your physical device
 
-Demo video: https://youtu.be/5tz1u_DJPsc
+Download the source code and compile the apk using Flutter CLI or Android Studio

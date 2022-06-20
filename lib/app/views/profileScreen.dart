@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
         elevation: 0,
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Container(
+      body: SizedBox(
         height: Get.height,
         width: Get.width,
         child: Column(
@@ -66,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Khondakarafridi35@gmail.com",
+                    "Khondakarafridi35@gma)il.com",
                     style: getSubtitleTextStyle.copyWith(
                       height: .9,
                     ),

@@ -20,15 +20,15 @@ class SplashScreen extends StatelessWidget {
       body: SizedBox(
         height: Get.height,
         width: Get.width,
-        child: Column(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppIcon(
-              size: Get.width / 8,
+              size: Get.width / 10,
             ),
             const SizedBox(
-              height: 2,
+              width: 5,
             ),
             Text(
               "Todoly",

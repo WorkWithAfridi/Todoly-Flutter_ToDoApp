@@ -115,7 +115,7 @@ class DashboardPage extends StatelessWidget {
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CustomCircularProgressLoadingIndicator();
+                return const CustomCircularProgressLoadingIndicator();
               }
               if (snapshot.data!.docs.isEmpty) {
                 return Text(

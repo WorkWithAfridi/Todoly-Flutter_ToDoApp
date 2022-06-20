@@ -7,21 +7,13 @@ class AppIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          width: 1,
-        ),
-        SizedBox(
-          height: size,
-          width: size,
-          child: Lottie.asset(
-            "assets/lottieAnimations/appIconAnimation.json",
-            repeat: false,
-          ),
-        ),
-      ],
+    return SizedBox(
+      height: size,
+      width: size,
+      child: Lottie.asset(
+        "assets/lottieAnimations/appIconAnimation.json",
+        repeat: false,
+      ),
     );
   }
 }

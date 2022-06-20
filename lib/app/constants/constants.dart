@@ -1,1 +1,1 @@
-const Duration waitTime = const Duration(seconds: 2);
+const Duration waitTime = Duration(seconds: 2);

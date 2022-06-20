@@ -17,7 +17,7 @@ class CompletedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Container(
+      child: SizedBox(
         height: Get.height,
         width: Get.width,
         child: SingleChildScrollView(
@@ -28,7 +28,7 @@ class CompletedPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Row(
                   children: [
@@ -75,6 +75,8 @@ class CompletedPage extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.docs.length,
+                      addAutomaticKeepAlives: false,
+                      addRepaintBoundaries: false,
                       itemBuilder: (context, index) {
                         TaskModel taskModel =
                             TaskModel.fromSnap(snapshot.data!.docs[index]);
