@@ -106,10 +106,10 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    getSocialMediaTab(),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // getSocialMediaTab(),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                   ],
                 ),
               ),

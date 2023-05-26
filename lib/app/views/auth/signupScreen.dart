@@ -89,10 +89,10 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              getSignupWIthSocialMediaTab(),
-              const SizedBox(
-                height: 20,
-              ),
+              // getSignupWIthSocialMediaTab(),
+              // const SizedBox(
+              //   height: 20,
+              // ),
             ],
           ),
         ),
