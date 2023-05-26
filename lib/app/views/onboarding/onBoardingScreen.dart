@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:todoly/app/data/theme/theme.dart';
-import 'package:todoly/app/widgets/appIcon.dart';
 import 'package:todoly/app/controllers/introductionModuleController.dart';
+import 'package:todoly/app/data/theme/theme.dart';
 import 'package:todoly/app/widgets/pageIndicator.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -21,19 +20,8 @@ class OnBoardingScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AppIcon(
-              size: Get.width / 3.5,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              "Get things done.",
-              style: getBoldTextStyle.copyWith(
-                  color: Get.theme.colorScheme.primary, fontSize: 20),
-            ),
             getPageText(),
             const SizedBox(
               height: 10,
@@ -57,21 +45,35 @@ class OnBoardingScreen extends StatelessWidget {
   Widget getPageText() {
     return Obx(
       () {
-        return SizedBox(
-          height: 100,
-          child: Text(
-            controller.currentPageIndex.value == 0
-                ? "Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis."
-                : controller.currentPageIndex.value == 1
-                    ? "Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis."
-                    : controller.currentPageIndex.value == 2
-                        ? "Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat."
-                        : "Hello",
-            style: getDefaultTextStyle.copyWith(
-              color: greyColor,
-              fontSize: 14,
+        return Column(
+          children: [
+            Text(
+              controller.currentPageIndex.value == 0
+                  ? "Stay Organized. Accomplish More."
+                  : controller.currentPageIndex.value == 1
+                      ? "Simplify Your Life. Conquer Your Tasks."
+                      : controller.currentPageIndex.value == 2
+                          ? "Effortless Task Management. Seamless Productivity."
+                          : "Hello",
+              style: getBoldTextStyle.copyWith(color: Get.theme.colorScheme.primary, fontSize: 20),
             ),
-          ),
+            SizedBox(
+              height: 100,
+              child: Text(
+                controller.currentPageIndex.value == 0
+                    ? "Introducing Todoly - The ultimate todo app that helps you stay organized and achieve your goals with ease. Manage your tasks, track progress, and boost your productivity."
+                    : controller.currentPageIndex.value == 1
+                        ? "Welcome to Todoly - The simple and powerful todo app designed to streamline your life. Easily add, prioritize, and complete tasks, ensuring nothing gets overlooked. Take control of your day and conquer your to-do list effortlessly."
+                        : controller.currentPageIndex.value == 2
+                            ? "Discover Todoly - The app that revolutionizes task management. From adding tasks to tracking progress, Todoly offers a seamless experience for boosting your productivity. Streamline your workflow and achieve more in less time."
+                            : "Hello",
+                style: getDefaultTextStyle.copyWith(
+                  color: greyColor,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
