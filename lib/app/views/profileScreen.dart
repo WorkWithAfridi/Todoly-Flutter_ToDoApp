@@ -10,8 +10,7 @@ import '../widgets/customBackButton.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
-  final AuthenticationModuleController authenticationModuleController =
-      Get.find();
+  final AuthenticationModuleController authenticationModuleController = Get.find();
   final HomeModuleController homeModuleController = Get.find();
 
   @override
@@ -51,23 +50,35 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(height: 50, width: 50,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), border: Border.all(width: 2, color: Colors.white,),),
-                      child: const Icon(Icons.person, size: 20,  color: Colors.white,)),
+                  Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          width: 2,
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.person,
+                        size: 20,
+                        color: Colors.white,
+                      )),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "Khondakar Afridi",
+                    authenticationModuleController.userModel.userName,
                     style: getBoldTextStyle.copyWith(
                       fontSize: 20,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    "Khondakarafridi35@gma)il.com",
-                    style: getSubtitleTextStyle.copyWith(
-                      height: .9,
-                    ),
+                    authenticationModuleController.userModel.email,
+                    style: getSubtitleTextStyle.copyWith(height: .9),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -97,9 +108,7 @@ class ProfileScreen extends StatelessWidget {
                         Text(
                           "Theme:",
                           style: getDefaultTextStyle.copyWith(
-                            color: Get.isDarkMode
-                                ? whiteColor.withOpacity(.8)
-                                : blackColor.withOpacity(.8),
+                            color: Get.isDarkMode ? whiteColor.withOpacity(.8) : blackColor.withOpacity(.8),
                           ),
                         ),
                         SizedBox(
@@ -140,9 +149,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Text(
                         "Delete user data",
                         style: getDefaultTextStyle.copyWith(
-                          color: Get.isDarkMode
-                              ? darkPrimaryColor
-                              : lightPrimaryColor,
+                          color: Get.isDarkMode ? darkPrimaryColor : lightPrimaryColor,
                         ),
                       ),
                     ),
@@ -156,9 +163,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Text(
                         "Delete account",
                         style: getDefaultTextStyle.copyWith(
-                          color: Get.isDarkMode
-                              ? darkPrimaryColor
-                              : lightPrimaryColor,
+                          color: Get.isDarkMode ? darkPrimaryColor : lightPrimaryColor,
                         ),
                       ),
                     ),
