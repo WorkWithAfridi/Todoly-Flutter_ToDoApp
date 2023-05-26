@@ -15,7 +15,7 @@ class PostingFunctions {
       required DateTime eventDate,
       required String status}) async {
     try {
-      String taskId = Uuid().v1();
+      String taskId = const Uuid().v1();
       TaskModel taskModel = TaskModel.name(
         id: taskId,
         title: title,

@@ -30,11 +30,11 @@ class SignupScreen extends StatelessWidget {
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         height: Get.height,
         width: Get.width,
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,7 @@ class SignupScreen extends StatelessWidget {
                     ),
                     alignment: Alignment.center,
                     child: controller.showSignupButtonLoadingAnimation.value
-                        ? CustomCircularProgressLoadingIndicator()
+                        ? const CustomCircularProgressLoadingIndicator()
                         : Text(
                             'Signup',
                             style: getBoldTextStyle.copyWith(

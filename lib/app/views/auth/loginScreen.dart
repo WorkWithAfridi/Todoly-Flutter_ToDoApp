@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:todoly/app/data/theme/theme.dart';
-import 'package:todoly/app/widgets/appIcon.dart';
 import 'package:todoly/app/widgets/customCircularProgressLoadingIndicator.dart';
 import 'package:todoly/app/widgets/customTextField.dart';
 import 'package:todoly/app/controllers/authenticationModuleController.dart';
@@ -53,7 +52,7 @@ class LoginScreen extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,

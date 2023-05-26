@@ -127,7 +127,7 @@ class ShowTaskDetailsScreen extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${DateFormat.MMMEd().format(taskModel.eventDate)}",
+                          DateFormat.MMMEd().format(taskModel.eventDate),
                           style: getDefaultTextStyle.copyWith(
                             color: Get.isDarkMode
                                 ? whiteColor.withOpacity(.6)

@@ -53,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Container(height: 50, width: 50,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), border: Border.all(width: 2, color: Colors.white,),),
-                      child: Icon(Icons.person, size: 20,  color: Colors.white,)),
+                      child: const Icon(Icons.person, size: 20,  color: Colors.white,)),
                   const SizedBox(
                     height: 10,
                   ),

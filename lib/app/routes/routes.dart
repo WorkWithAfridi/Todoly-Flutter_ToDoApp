@@ -30,7 +30,7 @@ class ROUTES {
     ),
     GetPage(
       name: getHomeScreenRoute,
-      page: () => Homescreen(),
+      page: () => const Homescreen(),
       binding: HomeModuleBinding(),
     ),
   ];

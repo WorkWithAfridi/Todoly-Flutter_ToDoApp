@@ -216,7 +216,7 @@ class DashboardPage extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CustomCircularProgressLoadingIndicator();
               }
-              if (snapshot.data!.docs.length == 0) {
+              if (snapshot.data!.docs.isEmpty) {
                 return Text(
                   'You have not completed any tasks yet!!',
                   style: getDefaultTextStyle.copyWith(
@@ -311,7 +311,7 @@ class DashboardPage extends StatelessWidget {
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CustomCircularProgressLoadingIndicator();
+                return const CustomCircularProgressLoadingIndicator();
               }
               if (snapshot.data!.docs.isEmpty) {
                 return Text(
@@ -374,7 +374,7 @@ class DashboardPage extends StatelessWidget {
                   },
                   child: Container(height: 50, width: 50,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), border: Border.all(width: 2, color: Colors.white,),),
-                      child: Icon(Icons.person, size: 20,  color: Colors.white,)),
+                      child: const Icon(Icons.person, size: 20,  color: Colors.white,)),
                 ),
                 const SizedBox(
                   width: 10,

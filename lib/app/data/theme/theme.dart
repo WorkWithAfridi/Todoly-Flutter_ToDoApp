@@ -54,7 +54,7 @@ class CustomTheme {
       onSurface: blackColor,
     ),
     textTheme: TextTheme(
-      headline5: getBoldTextStyle.copyWith(
+      headlineSmall: getBoldTextStyle.copyWith(
         color: blackColor,
       ),
     ),
@@ -76,7 +76,7 @@ class CustomTheme {
       onSurface: whiteColor,
     ),
     textTheme: TextTheme(
-      headline5: getBoldTextStyle.copyWith(
+      headlineSmall: getBoldTextStyle.copyWith(
         color: blackColor,
       ),
     ),

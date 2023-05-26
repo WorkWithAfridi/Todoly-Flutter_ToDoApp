@@ -7,7 +7,6 @@ import 'package:todoly/app/controllers/authenticationModuleController.dart';
 
 import '../data/models/taskModel.dart';
 import '../widgets/customBackButton.dart';
-import '../widgets/customCircularProgressLoadingIndicator.dart';
 import '../widgets/todoCard.dart';
 
 class SearchScreen extends StatelessWidget {
