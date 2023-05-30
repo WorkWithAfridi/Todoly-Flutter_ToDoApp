@@ -46,6 +46,7 @@ class OnBoardingScreen extends StatelessWidget {
     return Obx(
       () {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               controller.currentPageIndex.value == 0
@@ -55,7 +56,7 @@ class OnBoardingScreen extends StatelessWidget {
                       : controller.currentPageIndex.value == 2
                           ? "Effortless Task Management. Seamless Productivity."
                           : "Hello",
-              style: getBoldTextStyle.copyWith(color: Get.theme.colorScheme.primary, fontSize: 20),
+              style: getBoldTextStyle.copyWith(color: Get.theme.colorScheme.primary, fontSize: 16),
             ),
             SizedBox(
               height: 100,
